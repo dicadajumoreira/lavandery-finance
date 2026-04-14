@@ -553,31 +553,39 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh;background:
 </footer>
 
 <script>
-const PURPLE='#6B4EC2', TEAL='#00C896', LAVENDER='#EDEAF8';
+// ── DATA — all variables declared first ──────────────────────────
+const PURPLE='#6B4EC2', TEAL='#00C896';
 const LABELS=['Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const PREV=['Abr/26','Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26'];
 const REC=[152104,138311,156968,161733,162557,184427,217048,232473,220460,248138,304093,308332,320211,330196,423815];
-const RPREV=[493315,549791,562437,573256,592251,631426,662785,676330,686067]; // Pipeline real
+const RPREV=[493315,549791,562437,573256,592251,631426,662785,676330,686067];
 const UNITS=[23,23,24,25,25,31,34,39,41,46,49,59,65,74,80];
-const UPREV=[98,106,107,108,111,116,121,122,122]; // Pipeline real
+const UPREV=[98,106,107,108,111,116,121,122,122];
 const REP=REC.map(r=>Math.round(r*0.18));
 const REPPREV=RPREV.map(r=>Math.round(r*0.18));
+const RPREV_BASE=[423815,432291,440937,449756,458751,467926,477285,486830,496567];
+const RPREV_NEW=[69500,117500,121500,123500,133500,163500,185500,189500,189500];
 const ALL_LABELS=[...LABELS,...PREV];
 const ALL_REC=[...REC,...new Array(9).fill(null)];
 const ALL_PREV=[...new Array(15).fill(null),...RPREV];
 const ALL_UNITS=[...UNITS,...new Array(9).fill(null)];
 const ALL_UPREV=[...new Array(14).fill(null),80,...UPREV];
 const ALL_REP=[...REP,...new Array(9).fill(null)];
-const ALL_REPPREV=[...new Array(15).fill(null),...REPPREV];
 
+// Saldo data
+const SALDO_LABELS_FULL=["Mai/23","Jun/23","Jul/23","Ago/23","Set/23","Out/23","Nov/23","Dez/23","Jan/24","Fev/24","Mar/24","Abr/24","Mai/24","Jun/24","Jul/24","Ago/24","Set/24","Out/24","Nov/24","Dez/24","Jan/25","Fev/25","Mar/25","Abr/25","Mai/25","Jun/25","Jul/25","Ago/25","Set/25","Out/25","Nov/25","Dez/25","Jan/26","Fev/26","Mar/26","Abr/26","Mai/26","Jun/26","Jul/26","Ago/26","Set/26","Out/26","Nov/26","Dez/26"];
+const SALDO_HIST=[-259283,-684071,530881,630490,809676,1109560,1088833,887885,833283,336328,399065,905303,740785,932879,768067,865132,316143,427850,656063,1129627,1193428,1289993,857047,1116137,1240023,973168,1192694,1043571,1787843,60128,-107299,-927743,-597882,-445606,-1413065];
+const SALDO_PROJ=[-1118142,-776909,-425306,-64831,311220,719394,1156943,1605598,2062238];
+const SALDO_ORIG_FULL=[-259283,684071,530881,630490,809676,1109560,1088833,889885,837783,343328,408865,918103,756993,952287,973675,1075140,532291,650068,885651,1367785,1435230,1542948,1117666,1386252,1518863,1257290,1461076,1344996,2078230,341003,49753,-934893,-900712,-873032,-2189149,-1600828,-834923,247383,665043,523191,null,null,null,null];
+
+// Chart defaults
 Chart.defaults.font.family="'Plus Jakarta Sans',system-ui,sans-serif";
 Chart.defaults.color='#8F84B0';
 const GRID={color:'rgba(109,78,194,0.06)'};
 const BORDER={display:false};
-
 function fmtK(v){return v==null?null:`R$ ${(v/1000).toFixed(0)}k`}
 
-// Main chart
+// ── CHART: Receita principal ──────────────────────────────────────
 new Chart(document.getElementById('chartMain'),{
   type:'bar',
   data:{
@@ -586,15 +594,15 @@ new Chart(document.getElementById('chartMain'),{
       {label:'Realizado',data:ALL_REC,backgroundColor:PURPLE,borderRadius:6,borderSkipped:false,order:2},
       {label:'Previsto — base 80 un.',data:[...new Array(15).fill(null),...RPREV_BASE],backgroundColor:'rgba(107,78,194,.2)',borderRadius:6,borderSkipped:false,order:4,stack:'prev'},
       {label:'Previsto — novas un.',data:[...new Array(15).fill(null),...RPREV_NEW],backgroundColor:'rgba(0,200,150,.25)',borderRadius:6,borderSkipped:false,order:3,stack:'prev'},
-      {label:'Repasse (despesa)',data:[...ALL_REP,...ALL_REPPREV.slice(15)],type:'line',borderColor:TEAL,backgroundColor:'transparent',borderWidth:2,pointRadius:3,pointBackgroundColor:TEAL,tension:.4,order:1},
+      {label:'Repasse (despesa)',data:[...ALL_REP,...new Array(9).fill(null)],type:'line',borderColor:TEAL,backgroundColor:'transparent',borderWidth:2,pointRadius:3,pointBackgroundColor:TEAL,tension:.4,order:1},
     ]
   },
   options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtK(ctx.raw)}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw==null?null:ctx.dataset.label+': '+fmtK(ctx.raw)}}},
     scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:GRID,border:BORDER,ticks:{callback:v=>fmtK(v),font:{size:10}}}}}
 });
 
-// Units
+// ── CHART: Unidades ───────────────────────────────────────────────
 new Chart(document.getElementById('chartUnidades'),{
   type:'line',
   data:{
@@ -609,17 +617,17 @@ new Chart(document.getElementById('chartUnidades'),{
     scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:GRID,border:BORDER,ticks:{font:{size:10}},min:0}}}
 });
 
-// Despesas mini doughnut
+// ── CHART: Despesas mini doughnut ─────────────────────────────────
 new Chart(document.getElementById('chartDespMini'),{
   type:'doughnut',
   data:{
-    labels:['Implantações','Salários','Repasse','ESI','Outros'],
+    labels:['Implantações','Repasse compl.','Salários','ESI','Outros'],
     datasets:[{label:'Despesas',data:[2007830,246708,244086,232573,238000],backgroundColor:[PURPLE,'#4A2E9E',TEAL,'#C9BAEE','#A88DE0'],borderWidth:0,hoverOffset:4}]
   },
   options:{responsive:true,cutout:'68%',plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:10,boxWidth:12}}}}
 });
 
-// Receitas page chart
+// ── CHART: Receitas page ──────────────────────────────────────────
 new Chart(document.getElementById('chartReceitasPage'),{
   type:'bar',
   data:{
@@ -634,7 +642,7 @@ new Chart(document.getElementById('chartReceitasPage'),{
     scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:GRID,border:BORDER,ticks:{callback:v=>fmtK(v),font:{size:10}}}}}
 });
 
-// Despesas bar
+// ── CHART: Despesas horizontal ────────────────────────────────────
 new Chart(document.getElementById('chartDespPrincipal'),{
   type:'bar',
   data:{
@@ -648,7 +656,7 @@ new Chart(document.getElementById('chartDespPrincipal'),{
     scales:{x:{grid:GRID,border:BORDER,ticks:{callback:v=>fmtK(v),font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
 });
 
-// Growth chart
+// ── CHART: Growth ─────────────────────────────────────────────────
 new Chart(document.getElementById('chartGrowth'),{
   type:'line',
   data:{
@@ -668,273 +676,102 @@ new Chart(document.getElementById('chartGrowth'),{
     }}
 });
 
-// Table
+// ── CHART: Saldo evolution ────────────────────────────────────────
+const histLen=SALDO_HIST.length;
+new Chart(document.getElementById('chartSaldo'),{
+  type:'bar',
+  data:{
+    labels:SALDO_LABELS_FULL,
+    datasets:[
+      {label:'Saldo Corrigido (realizado)',data:[...SALDO_HIST,...new Array(9).fill(null)],
+        backgroundColor:SALDO_HIST.map(v=>v>=0?'rgba(0,200,150,0.85)':'rgba(217,64,96,0.85)'),
+        borderRadius:5,borderSkipped:false,order:2},
+      {label:'Saldo Projetado (pipeline real)',data:[...new Array(35).fill(null),...SALDO_PROJ],
+        backgroundColor:SALDO_PROJ.map(v=>v>=0?'rgba(0,200,150,0.35)':'rgba(217,64,96,0.35)'),
+        borderRadius:5,borderSkipped:false,order:3},
+      {label:'Saldo Original (fluxo)',data:SALDO_ORIG_FULL,
+        type:'line',borderColor:'rgba(107,78,194,0.45)',backgroundColor:'transparent',
+        borderWidth:1.5,borderDash:[4,3],pointRadius:2,pointBackgroundColor:'rgba(107,78,194,0.45)',
+        tension:0.35,order:1},
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{size:12},boxWidth:14,padding:16}},
+      tooltip:{callbacks:{label:ctx=>ctx.raw===null?null:ctx.dataset.label+': R$ '+(ctx.raw>=0?'+':'')+Math.round(ctx.raw).toLocaleString('pt-BR')}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:9},maxRotation:50}},
+      y:{grid:GRID,border:BORDER,ticks:{callback:v=>'R$ '+(v/1000000).toFixed(1)+'M',font:{size:10}}}
+    }}
+});
+
+// ── CHART: Delta mensal ───────────────────────────────────────────
+const SALDO_DELTA=SALDO_HIST.map((v,i)=>i===0?0:Math.round(v-SALDO_HIST[i-1]));
+const SALDO_DELTA_PROJ=SALDO_PROJ.map((v,i)=>{
+  const prev=i===0?SALDO_HIST[SALDO_HIST.length-1]:SALDO_PROJ[i-1];
+  return Math.round(v-prev);
+});
+new Chart(document.getElementById('chartDelta'),{
+  type:'bar',
+  data:{
+    labels:SALDO_LABELS_FULL,
+    datasets:[
+      {label:'Variação mensal (realizado)',data:[...SALDO_DELTA,...new Array(9).fill(null)],
+        backgroundColor:SALDO_DELTA.map(v=>v>=0?'rgba(0,200,150,0.8)':'rgba(217,64,96,0.8)'),
+        borderRadius:4,borderSkipped:false},
+      {label:'Variação mensal (previsto)',data:[...new Array(35).fill(null),...SALDO_DELTA_PROJ],
+        backgroundColor:SALDO_DELTA_PROJ.map(v=>v>=0?'rgba(0,200,150,0.35)':'rgba(217,64,96,0.35)'),
+        borderRadius:4,borderSkipped:false}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12}},
+      tooltip:{callbacks:{label:ctx=>ctx.raw===null?null:'R$ '+(ctx.raw>=0?'+':'')+Math.round(ctx.raw).toLocaleString('pt-BR')}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:9},maxRotation:50}},
+      y:{grid:GRID,border:BORDER,ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k',font:{size:10}}}
+    }}
+});
+
+// ── Tabela receitas ───────────────────────────────────────────────
 const tb=document.getElementById('tbReceitas');
-const OUTROS_CUSTOS_UNIT = 65000+21935+3500+3660+2500+8000; // salários+ESI+google+porter+contaiffer+manut
+const OUTROS=Math.round(65000+21935+3500+3660+2500+8000);
 LABELS.forEach((m,i)=>{
   const rep=REP[i];
-  const outros=OUTROS_CUSTOS_UNIT;
-  const resultado=Math.round(REC[i]-rep-outros);
-  const resColor=resultado>=0?'var(--teal-dark)':'#D94060';
+  const res=Math.round(REC[i]-rep-OUTROS);
+  const rc=res>=0?'var(--teal-dark)':'#D94060';
   tb.innerHTML+=`<tr>
     <td><b>${m}</b></td>
     <td class="num"><b>R$ ${REC[i].toLocaleString('pt-BR')}</b></td>
     <td class="num" style="color:#D94060">− R$ ${rep.toLocaleString('pt-BR')}</td>
-    <td class="num" style="color:var(--text-mid)">− R$ ${outros.toLocaleString('pt-BR')}</td>
-    <td class="num" style="color:${resColor};font-weight:700">${resultado>=0?'+':''} R$ ${resultado.toLocaleString('pt-BR')}</td>
+    <td class="num" style="color:var(--text-mid)">− R$ ${OUTROS.toLocaleString('pt-BR')}</td>
+    <td class="num" style="color:${rc};font-weight:700">${res>=0?'+':''} R$ ${Math.abs(res).toLocaleString('pt-BR')}</td>
     <td class="num">${UNITS[i]}</td>
     <td><span class="pill pill-green">Realizado</span></td>
   </tr>`;
 });
 PREV.forEach((m,i)=>{
   const rep=REPPREV[i];
-  const outros=Math.round(OUTROS_CUSTOS_UNIT*(1+i*0.02));
-  const resultado=Math.round(RPREV[i]-rep-outros);
-  const resColor=resultado>=0?'var(--teal-dark)':'#D94060';
+  const outros=Math.round(OUTROS*(1+i*0.02));
+  const res=Math.round(RPREV[i]-rep-outros);
+  const rc=res>=0?'var(--teal-dark)':'#D94060';
   tb.innerHTML+=`<tr class="prev">
     <td><i>${m}</i></td>
     <td class="num">R$ ${RPREV[i].toLocaleString('pt-BR')}</td>
     <td class="num" style="color:#D94060">− R$ ${rep.toLocaleString('pt-BR')}</td>
     <td class="num" style="color:var(--text-mid)">− R$ ${outros.toLocaleString('pt-BR')}</td>
-    <td class="num" style="color:${resColor};font-weight:700">${resultado>=0?'+':''} R$ ${resultado.toLocaleString('pt-BR')}</td>
+    <td class="num" style="color:${rc};font-weight:700">${res>=0?'+':''} R$ ${Math.abs(res).toLocaleString('pt-BR')}</td>
     <td class="num">${UPREV[i]}</td>
     <td><span class="pill pill-amber">Previsto</span></td>
   </tr>`;
 });
 
+// ── Tab navigation ────────────────────────────────────────────────
 function setTab(id,btn){
   document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
-
-
-// Stacked projection: base revenue vs new units revenue
-const RPREV_BASE=[423815,432291,440937,449756,458751,467926,477285,486830,496567];
-const RPREV_NEW=[69500,117500,121500,123500,133500,163500,185500,189500,189500];
-const RUPREV_REAL=[98,106,107,108,111,116,121,122,122];
-
-
-// ─── SALDO EVOLUTION (full history + projection) ──────────────────────
-const SALDO_LABELS_FULL = ["Mai/23", "Jun/23", "Jul/23", "Ago/23", "Set/23", "Out/23", "Nov/23", "Dez/23", "Jan/24", "Fev/24", "Mar/24", "Abr/24", "Mai/24", "Jun/24", "Jul/24", "Ago/24", "Set/24", "Out/24", "Nov/24", "Dez/24", "Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26", "Out/26", "Nov/26", "Dez/26"];
-const SALDO_HIST = [-259283.15, 684071.14, 530880.99, 630489.52, 809675.71, 1109559.6, 1088833.26, 887885.3, 833282.76, 336327.5, 399064.73, 905302.94, 740785.06, 932879.2, 768066.51, 865131.78, 316143.32, 427850.2, 656062.65, 1129627.36, 1193428.31, 1289993.03, 857047.19, 1116136.61, 1240022.88, 973168.37, 1192693.72, 1043571.38, 1787843.21, 60128.44, -107299.18, -927742.7, -597881.97, -445606.26, -1413065.43];
-const SALDO_PROJ = [-1118142.28, -776908.81, -425305.62, -64830.85, 311219.82, 719393.99, 1156942.69, 1605598.29, 2062238.23];
-const SALDO_ORIG_FULL = [-259283.15, 684071.14, 530880.99, 630489.52, 809675.71, 1109559.6, 1088833.26, 889885.3, 837782.76, 343327.5, 408864.73, 918102.94, 756993.06, 952287.2, 973674.51, 1075139.78, 532291.32, 650068.2, 885650.65, 1367785.36, 1435230.11, 1542948.18, 1117666.04, 1386251.51, 1518862.98, 1257289.67, 1461076.12, 1344996.18, 2078230.01, 341003.19, 49752.62, -934892.58, -900712.42, -873032.09, -2189148.65, -1600827.58, -834923.46, 247383.47, 665043.2, 523191.45, null, null, null, null];
-
-// Full corrigido: hist + proj
-const SALDO_FULL = [...SALDO_HIST, ...SALDO_PROJ];
-// Colors: teal=positive, red=negative, gray=projected
-const histLen = SALDO_HIST.length;
-const saldoColors = SALDO_FULL.map((v,i) => 
-  i >= histLen ? (v >= 0 ? 'rgba(0,200,150,0.35)' : 'rgba(217,64,96,0.35)') :
-  v >= 0 ? 'rgba(0,200,150,0.85)' : 'rgba(217,64,96,0.85)'
-);
-const origClean = SALDO_ORIG_FULL.map(v => v === null ? null : v);
-
-new Chart(document.getElementById('chartSaldo'), {
-  type: 'bar',
-  data: {
-    labels: SALDO_LABELS_FULL,
-    datasets: [
-      {
-        label: 'Saldo Corrigido (realizado)',
-        data: [...SALDO_HIST, ...new Array(9).fill(null)],
-        backgroundColor: SALDO_HIST.map(v => v >= 0 ? 'rgba(0,200,150,0.85)' : 'rgba(217,64,96,0.85)'),
-        borderRadius: 5, borderSkipped: false, order: 2,
-      },
-      {
-        label: 'Saldo Projetado (pipeline real)',
-        data: [...new Array(35).fill(null), ...SALDO_PROJ],
-        backgroundColor: SALDO_PROJ.map(v => v >= 0 ? 'rgba(0,200,150,0.35)' : 'rgba(217,64,96,0.35)'),
-        borderRadius: 5, borderSkipped: false, order: 3,
-      },
-      {
-        label: 'Saldo Original (fluxo)',
-        data: origClean,
-        type: 'line',
-        borderColor: 'rgba(107,78,194,0.45)',
-        backgroundColor: 'transparent',
-        borderWidth: 1.5, borderDash: [4,3],
-        pointRadius: 2, pointBackgroundColor: 'rgba(107,78,194,0.45)',
-        tension: 0.35, order: 1,
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
-      tooltip: { callbacks: { label: ctx => {
-        const v = ctx.raw; if (v === null) return null;
-        return ctx.dataset.label + ': R$ ' + (v >= 0 ? '+' : '') + Math.round(v).toLocaleString('pt-BR');
-      } } }
-    },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 50 } },
-      y: {
-        grid: { color: 'rgba(109,78,194,0.06)' },
-        border: { display: false },
-        ticks: { callback: v => 'R$ ' + (v/1000000).toFixed(1) + 'M', font: { size: 10 } }
-      }
-    }
-  }
-});
-
-// Delta chart (month-over-month change, realizado only)
-const SALDO_DELTA = SALDO_HIST.map((v,i) => i===0 ? 0 : Math.round(v - SALDO_HIST[i-1]));
-const SALDO_DELTA_PROJ = SALDO_PROJ.map((v,i) => {
-  const prev = i===0 ? SALDO_HIST[SALDO_HIST.length-1] : SALDO_PROJ[i-1];
-  return Math.round(v - prev);
-});
-
-new Chart(document.getElementById('chartDelta'), {
-  type: 'bar',
-  data: {
-    labels: SALDO_LABELS_FULL,
-    datasets: [
-      {
-        label: 'Variação mensal (realizado)',
-        data: [...SALDO_DELTA, ...new Array(9).fill(null)],
-        backgroundColor: SALDO_DELTA.map(v => v >= 0 ? 'rgba(0,200,150,0.8)' : 'rgba(217,64,96,0.8)'),
-        borderRadius: 4, borderSkipped: false,
-      },
-      {
-        label: 'Variação mensal (previsto)',
-        data: [...new Array(35).fill(null), ...SALDO_DELTA_PROJ],
-        backgroundColor: SALDO_DELTA_PROJ.map(v => v >= 0 ? 'rgba(0,200,150,0.35)' : 'rgba(217,64,96,0.35)'),
-        borderRadius: 4, borderSkipped: false,
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 12 } },
-      tooltip: { callbacks: { label: ctx => ctx.raw === null ? null : 'R$ ' + (ctx.raw >= 0?'+':'') + Math.round(ctx.raw).toLocaleString('pt-BR') } } },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 50 } },
-      y: { grid: { color: 'rgba(109,78,194,0.06)' }, border: { display: false },
-        ticks: { callback: v => 'R$ ' + (v/1000).toFixed(0) + 'k', font: { size: 10 } } }
-    }
-  }
-});
-
-
-function setTab(id,btn){
-  document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
-
-
-// Stacked projection: base revenue vs new units revenue
-const RPREV_BASE=[423815,432291,440937,449756,458751,467926,477285,486830,496567];
-const RPREV_NEW=[69500,117500,121500,123500,133500,163500,185500,189500,189500];
-const RUPREV_REAL=[98,106,107,108,111,116,121,122,122];
-
-// Saldo Evolution
-const SALDO_LABELS = ["Mai/23", "Jun/23", "Jul/23", "Ago/23", "Set/23", "Out/23", "Nov/23", "Dez/23", "Jan/24", "Fev/24", "Mar/24", "Abr/24", "Mai/24", "Jun/24", "Jul/24", "Ago/24", "Set/24", "Out/24", "Nov/24", "Dez/24", "Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26"];
-const SALDO_ORIG = [-259283.15, 684071.14, 530880.99, 630489.52, 809675.71, 1109559.6, 1088833.26, 889885.3, 837782.76, 343327.5, 408864.73, 918102.94, 756993.06, 952287.2, 973674.51, 1075139.78, 532291.32, 650068.2, 885650.65, 1367785.36, 1435230.11, 1542948.18, 1117666.04, 1386251.51, 1518862.98, 1257289.67, 1461076.12, 1344996.18, 2078230.01, 341003.19, 49752.62, -934892.58, -900712.42, -873032.09, -2189148.65, -1600827.58, -834923.46, 247383.47, 665043.2, 523191.45];
-const SALDO_CORR = [-259283.15, 684071.14, 530880.99, 630489.52, 809675.71, 1109559.6, 1088833.26, 887885.3, 833282.76, 336327.5, 399064.73, 905302.94, 740785.06, 932879.2, 768066.51, 865131.78, 316143.32, 427850.2, 656062.65, 1129627.36, 1193428.31, 1289993.03, 857047.19, 1116136.61, 1240022.88, 973168.37, 1192693.72, 1043571.38, 1787843.21, 60128.44, -107299.18, -927742.7, -597881.97, -445606.26, -1413065.43, -830904.51, -71160.54, 1004986.24, 1416485.82, 1268473.92];
-
-// Color arrays based on value (positive=teal, negative=red)
-const saldoCorrColors = SALDO_CORR.map(v => v >= 0 ? 'rgba(0,200,150,0.85)' : 'rgba(217,64,96,0.85)');
-const saldoOrigColors = SALDO_ORIG.map(v => v >= 0 ? 'rgba(107,78,194,0.3)' : 'rgba(217,64,96,0.2)');
-
-new Chart(document.getElementById('chartSaldo'), {
-  type: 'bar',
-  data: {
-    labels: SALDO_LABELS,
-    datasets: [
-      {
-        label: 'Saldo Corrigido',
-        data: SALDO_CORR,
-        backgroundColor: saldoCorrColors,
-        borderRadius: 5,
-        borderSkipped: false,
-        order: 2,
-      },
-      {
-        label: 'Saldo Original',
-        data: SALDO_ORIG,
-        type: 'line',
-        borderColor: 'rgba(107,78,194,0.5)',
-        backgroundColor: 'transparent',
-        borderWidth: 1.5,
-        borderDash: [4,3],
-        pointRadius: 2,
-        pointBackgroundColor: 'rgba(107,78,194,0.5)',
-        tension: 0.35,
-        order: 1,
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: { font: { size: 12 }, boxWidth: 14, padding: 16 }
-      },
-      tooltip: {
-        callbacks: {
-          label: ctx => {
-            const v = ctx.raw;
-            const sign = v >= 0 ? '+' : '';
-            return ctx.dataset.label + ': R$ ' + sign + Math.round(v).toLocaleString('pt-BR');
-          }
-        }
-      },
-      annotation: {}
-    },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
-      y: {
-        grid: { color: 'rgba(109,78,194,0.06)' },
-        border: { display: false },
-        ticks: {
-          callback: v => 'R$ ' + (v/1000000).toFixed(1) + 'M',
-          font: { size: 10 }
-        }
-      }
-    }
-  }
-});
-
-// Monthly delta chart
-const SALDO_DELTA = SALDO_CORR.map((v,i) => i===0 ? 0 : Math.round(v - SALDO_CORR[i-1]));
-new Chart(document.getElementById('chartDelta'), {
-  type: 'bar',
-  data: {
-    labels: SALDO_LABELS,
-    datasets: [{
-      label: 'Variação mensal',
-      data: SALDO_DELTA,
-      backgroundColor: SALDO_DELTA.map(v => v >= 0 ? 'rgba(0,200,150,0.8)' : 'rgba(217,64,96,0.8)'),
-      borderRadius: 4,
-      borderSkipped: false,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: ctx => 'R$ ' + Math.round(ctx.raw).toLocaleString('pt-BR') } }
-    },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
-      y: {
-        grid: { color: 'rgba(109,78,194,0.06)' },
-        border: { display: false },
-        ticks: { callback: v => 'R$ ' + (v/1000).toFixed(0) + 'k', font: { size: 10 } }
-      }
-    }
-  }
-});
-
 </script>
 </body>
 </html>

@@ -772,6 +772,75 @@ function setTab(id,btn){
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
+
+// ── Atualização dinâmica de data e saldo ──────────────────────
+(function(){
+  var NET = {"2026-04": 294923, "2026-05": 341233, "2026-06": 351603, "2026-07": 360475, "2026-08": 376051, "2026-09": 408174, "2026-10": 437549, "2026-11": 448656, "2026-12": 456640};
+  var BASE = -1413065.43; // Saldo corrigido Mar/26
+  var meses = ['janeiro','fevereiro','março','abril','maio','junho',
+               'julho','agosto','setembro','outubro','novembro','dezembro'];
+  var mesesCurtos = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+  var hoje = new Date();
+  var d=hoje.getDate(), m=hoje.getMonth()+1, a=hoje.getFullYear();
+  var dataLonga = d+' de '+meses[m-1]+' de '+a;
+  var dataCurta = (d<10?'0':'')+d+'/'+(m<10?'0':'')+m+'/'+a;
+
+  // Atualiza nav
+  var navEl = document.getElementById('navDataHoje');
+  if(navEl) navEl.textContent = 'Atualizado em ' + dataCurta;
+
+  // Calcula saldo estimado de hoje
+  function calcSaldo(){
+    var saldo = BASE;
+    var ca=2026, cm=4;
+    while(ca<a||(ca===a&&cm<m)){
+      var k=ca+'-'+(cm<10?'0':'')+cm;
+      saldo+=(NET[k]||0); cm++; if(cm>12){cm=1;ca++;}
+    }
+    var km=a+'-'+(m<10?'0':'')+m;
+    var dias=new Date(a,m,0).getDate();
+    saldo+=(NET[km]||0)*(d/dias);
+    return Math.round(saldo);
+  }
+
+  var saldo = calcSaldo();
+  var absS = Math.abs(saldo);
+  var strS = absS>=1000000?'− R$ '+(absS/1000000).toFixed(2)+'M':
+             absS>=1000?'R$ '+(absS/1000).toFixed(0)+'k':'R$ '+absS.toLocaleString('pt-BR');
+  if(saldo<0) strS='− R$ '+(absS>=1000000?(absS/1000000).toFixed(2)+'M':absS>=1000?(absS/1000).toFixed(0)+'k':absS.toLocaleString('pt-BR'));
+  else strS='+R$ '+(absS>=1000000?(absS/1000000).toFixed(2)+'M':absS>=1000?(absS/1000).toFixed(0)+'k':absS.toLocaleString('pt-BR'));
+
+  // Atualiza KPI de saldo corrigido no dashboard
+  var kpiEls = document.querySelectorAll('.kpi-value');
+  kpiEls.forEach(function(el){
+    if(el.textContent.includes('1,44M') || el.textContent.includes('1,41M')){
+      el.textContent = strS;
+      el.className = 'kpi-value '+(saldo>=0?'green':'red');
+      var sub=el.nextElementSibling;
+      if(sub) sub.textContent = 'estimado '+dataCurta;
+    }
+  });
+
+  // Atualiza hero date se existir
+  var heroDate = document.querySelector('.hero-period');
+  if(heroDate && heroDate.textContent.includes('2025')){
+    // mantém o range mas atualiza o "Atualizado"
+  }
+
+  // Atualiza qualquer elemento com data estática 14/04/2026
+  document.querySelectorAll('*').forEach(function(el){
+    if(el.children.length===0 && el.textContent.includes('14/04/2026')){
+      el.textContent = el.textContent.replace('14/04/2026', dataCurta);
+    }
+    if(el.children.length===0 && el.textContent.includes('14 de Abril de 2026')){
+      el.textContent = el.textContent.replace('14 de Abril de 2026', dataLonga);
+    }
+  });
+
+  console.log('[Lavandery Finance] Atualizado: '+dataCurta+' | Saldo estimado: '+strS);
+})();
+
 </script>
 </body>
 </html>

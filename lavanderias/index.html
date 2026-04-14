@@ -15,13 +15,11 @@
   --teal:#00C896;--teal-dark:#00A87C;
   --white:#FFFFFF;--text-dark:#1E1440;--text-mid:#5A4E7A;--text-light:#8F84B0;
   --red:#D94060;--font:'Plus Jakarta Sans',system-ui,sans-serif;
-  --radius-lg:20px;--radius-md:14px;--radius-sm:10px;
+  --radius-lg:20px;--radius-md:14px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--lavender)}
 body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
-
-/* NAV */
 .nav{background:var(--white);display:flex;align-items:center;justify-content:space-between;
   padding:0 40px;height:68px;border-bottom:1px solid var(--lavender-mid);
   position:sticky;top:0;z-index:200;}
@@ -34,133 +32,99 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
 .logo-sub{font-size:10px;font-weight:600;color:var(--text-light);letter-spacing:.15em;text-transform:uppercase}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-back{font-size:13px;font-weight:600;color:var(--purple);text-decoration:none;
-  padding:6px 14px;border-radius:9px;border:1px solid var(--lavender-mid);
-  transition:background .15s;}
+  padding:6px 14px;border-radius:9px;border:1px solid var(--lavender-mid);transition:background .15s;}
 .nav-back:hover{background:var(--lavender)}
 .nav-count{font-size:12px;font-weight:600;color:var(--text-light)}
-
-/* HERO */
 .hero{background:linear-gradient(135deg,var(--purple-dark),var(--purple));
   padding:40px 40px 36px;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;bottom:-60px;right:-60px;width:300px;height:300px;
   border-radius:50%;background:rgba(0,200,150,.07);}
 .hero-inner{position:relative;z-index:1}
-.hero-eyebrow{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.15em;
-  text-transform:uppercase;margin-bottom:10px}
+.hero-eyebrow{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
 .hero-title{font-size:32px;font-weight:800;color:var(--white);margin-bottom:6px}
 .hero-sub{font-size:14px;color:rgba(255,255,255,.55)}
-
-/* SEARCH + FILTERS */
-.toolbar{padding:24px 40px;background:var(--white);border-bottom:1px solid var(--lavender-mid);
-  display:flex;gap:12px;align-items:center;}
-.search-wrap{position:relative;flex:1;max-width:380px}
-.search-wrap input{width:100%;padding:10px 16px 10px 40px;border:1px solid var(--lavender-mid);
+.toolbar{padding:20px 40px;background:var(--white);border-bottom:1px solid var(--lavender-mid);
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.search-wrap{position:relative;flex:1;min-width:220px;max-width:360px}
+.search-wrap input{width:100%;padding:10px 16px 10px 38px;border:1px solid var(--lavender-mid);
   border-radius:12px;font-family:var(--font);font-size:14px;color:var(--text-dark);
   background:var(--lavender);outline:none;transition:border .15s;}
 .search-wrap input:focus{border-color:var(--purple)}
-.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);
-  color:var(--text-light);font-size:16px;pointer-events:none}
-.filter-btn{padding:8px 16px;border-radius:10px;border:1px solid var(--lavender-mid);
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
+.filter-btn{padding:8px 14px;border-radius:10px;border:1px solid var(--lavender-mid);
   background:var(--lavender);font-family:var(--font);font-size:13px;font-weight:600;
   color:var(--text-mid);cursor:pointer;transition:all .15s;}
 .filter-btn.active{background:var(--purple);color:var(--white);border-color:var(--purple)}
-.sort-select{padding:8px 14px;border-radius:10px;border:1px solid var(--lavender-mid);
-  background:var(--lavender);font-family:var(--font);font-size:13px;color:var(--text-mid);
-  cursor:pointer;outline:none;}
-
-/* GRID */
-.grid-wrap{padding:28px 40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
-
-/* UNIT CARD */
-.unit-card{background:var(--white);border-radius:var(--radius-lg);
-  border:1px solid var(--lavender-mid);cursor:pointer;
-  transition:all .2s;overflow:hidden;}
-.unit-card:hover{border-color:var(--purple);box-shadow:0 4px 24px rgba(107,78,194,.1);
-  transform:translateY(-2px)}
-.unit-card-header{padding:20px 22px 16px;border-bottom:1px solid var(--lavender-mid)}
-.unit-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.unit-id{font-size:10px;font-weight:700;color:var(--text-light);letter-spacing:.1em;
-  text-transform:uppercase;margin-bottom:4px}
-.unit-name{font-size:15px;font-weight:700;color:var(--text-dark);line-height:1.3}
-.unit-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;
-  background:var(--lavender);color:var(--purple);white-space:nowrap}
-.unit-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
-  padding:14px 22px 16px;}
+.sort-select{padding:8px 12px;border-radius:10px;border:1px solid var(--lavender-mid);
+  background:var(--lavender);font-family:var(--font);font-size:13px;color:var(--text-mid);cursor:pointer;outline:none;}
+.grid-wrap{padding:24px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.unit-card{background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--lavender-mid);
+  cursor:pointer;transition:all .2s;overflow:hidden;}
+.unit-card:hover{border-color:var(--purple);box-shadow:0 4px 20px rgba(107,78,194,.12);transform:translateY(-2px)}
+.unit-card-header{padding:18px 20px 14px;border-bottom:1px solid var(--lavender-mid)}
+.unit-card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.unit-id{font-size:10px;font-weight:700;color:var(--text-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.unit-name{font-size:14px;font-weight:700;color:var(--text-dark);line-height:1.3}
+.unit-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--lavender);color:var(--purple);white-space:nowrap;margin-left:8px;flex-shrink:0}
+.unit-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:12px 20px 14px}
 .metric-item{text-align:center}
-.metric-label{font-size:9px;font-weight:700;color:var(--text-light);
-  letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.metric-val{font-size:15px;font-weight:800;color:var(--text-dark)}
+.metric-label{font-size:9px;font-weight:700;color:var(--text-light);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.metric-val{font-size:14px;font-weight:800;color:var(--text-dark)}
 .metric-val.green{color:var(--teal-dark)}
 .metric-val.purple{color:var(--purple)}
-.unit-chart{padding:0 18px 16px;height:72px}
-
-/* DETAIL MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(30,20,64,.5);
-  z-index:500;display:none;align-items:center;justify-content:center;
-  backdrop-filter:blur(4px);padding:20px;}
+.unit-chart{padding:0 16px 14px;height:64px}
+.modal-overlay{position:fixed;inset:0;background:rgba(30,20,64,.55);z-index:500;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:20px;}
 .modal-overlay.open{display:flex}
-.modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:860px;
+.modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:840px;
   max-height:90vh;overflow-y:auto;position:relative;}
-.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;
-  border-radius:50%;background:var(--lavender);border:none;cursor:pointer;
-  font-size:18px;color:var(--text-mid);display:flex;align-items:center;justify-content:center;
-  transition:background .15s;z-index:10;}
-.modal-close:hover{background:var(--lavender-mid)}
+.modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.2);border:none;cursor:pointer;font-size:20px;color:var(--white);
+  display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:10;}
+.modal-close:hover{background:rgba(255,255,255,.3)}
 .modal-header{background:linear-gradient(135deg,var(--purple-dark),var(--purple));
-  padding:32px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
-.modal-id{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);
-  letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px}
-.modal-name{font-size:26px;font-weight:800;color:var(--white);margin-bottom:16px}
-.modal-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  padding:30px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+.modal-id{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.modal-name{font-size:24px;font-weight:800;color:var(--white);margin-bottom:20px}
+.modal-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .modal-kpi{background:rgba(255,255,255,.1);border-radius:var(--radius-md);padding:14px}
-.modal-kpi-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);
-  letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.modal-kpi-val{font-size:20px;font-weight:800;color:var(--white)}
+.modal-kpi-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.modal-kpi-val{font-size:19px;font-weight:800;color:var(--white)}
 .modal-kpi-val.teal{color:var(--teal)}
-.modal-body{padding:28px}
-.modal-section-title{font-size:16px;font-weight:800;color:var(--text-dark);
-  margin-bottom:16px}
-.modal-chart-wrap{height:240px;position:relative;margin-bottom:28px}
+.modal-body{padding:26px}
+.modal-section-title{font-size:16px;font-weight:800;color:var(--text-dark);margin-bottom:14px}
+.modal-chart-wrap{height:220px;position:relative;margin-bottom:24px}
 .modal-table{width:100%;border-collapse:collapse;font-size:13px}
-.modal-table th{font-size:10px;font-weight:700;color:var(--text-light);
-  letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;
-  text-align:left;border-bottom:1px solid var(--lavender-mid)}
-.modal-table td{padding:11px 12px;border-bottom:1px solid var(--lavender-mid);
-  color:var(--text-dark)}
+.modal-table th{font-size:10px;font-weight:700;color:var(--text-light);letter-spacing:.1em;
+  text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid var(--lavender-mid)}
+.modal-table td{padding:10px 12px;border-bottom:1px solid var(--lavender-mid);color:var(--text-dark)}
 .modal-table tr:last-child td{border-bottom:none}
 .modal-table tr:hover td{background:var(--lavender)}
 .num{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
 .pos{color:var(--teal-dark)}.neg{color:var(--red)}
-
-/* EMPTY */
 .empty{text-align:center;padding:80px 40px;color:var(--text-light)}
 .empty-icon{font-size:48px;margin-bottom:16px}
 .empty-title{font-size:18px;font-weight:700;color:var(--text-mid);margin-bottom:8px}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .unit-card{animation:fadeUp .3s ease both}
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <a class="logo" href="/fluxo">
     <div class="logo-icon">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.5"/>
         <path d="M8 12c1-3 6-3 8 0" stroke-linecap="round"/></svg>
     </div>
-    <div>
-      <div class="logo-text">LAVAN<span>DERY</span></div>
-      <div class="logo-sub">Finance</div>
-    </div>
+    <div><div class="logo-text">LAVAN<span>DERY</span></div>
+    <div class="logo-sub">Finance</div></div>
   </a>
   <div class="nav-right">
     <span class="nav-count" id="countLabel">80 lavanderias</span>
     <a class="nav-back" href="/fluxo">← Visão Geral</a>
   </div>
 </nav>
-
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Jan/2025 — Mar/2026</div>
@@ -168,91 +132,75 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
     <div class="hero-sub">Receita, ciclos e repasse · 80 unidades operacionais</div>
   </div>
 </div>
-
 <div class="toolbar">
   <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Buscar lavanderia..." oninput="filterUnits()">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="Buscar lavanderia..." oninput="renderGrid()">
   </div>
   <button class="filter-btn active" onclick="setFilter('all',this)">Todas</button>
   <button class="filter-btn" onclick="setFilter('top10',this)">Top 10</button>
-  <button class="filter-btn" onclick="setFilter('15meses',this)">15 meses</button>
-  <select class="sort-select" id="sortSelect" onchange="filterUnits()">
-    <option value="total">↓ Maior receita total</option>
-    <option value="ultima">↓ Maior receita Mar/26</option>
-    <option value="media">↓ Maior média mensal</option>
-    <option value="meses">↓ Mais meses</option>
-    <option value="nome">A → Z Nome</option>
+  <button class="filter-btn" onclick="setFilter('15meses',this)">15 meses completos</button>
+  <select class="sort-select" id="sortSelect" onchange="renderGrid()">
+    <option value="total">&#8595; Maior receita total</option>
+    <option value="ultima">&#8595; Maior receita Mar/26</option>
+    <option value="media">&#8595; Maior média mensal</option>
+    <option value="meses">&#8595; Mais meses</option>
+    <option value="nome">A &#8594; Z Nome</option>
   </select>
 </div>
-
 <div class="grid-wrap">
   <div class="grid" id="unitGrid"></div>
   <div class="empty" id="emptyState" style="display:none">
-    <div class="empty-icon">🔍</div>
+    <div class="empty-icon">&#128269;</div>
     <div class="empty-title">Nenhuma lavanderia encontrada</div>
     <div>Tente outro nome ou filtro</div>
   </div>
 </div>
-
-<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modalBox">
-    <button class="modal-close" onclick="closeModalDirect()">×</button>
+    <button class="modal-close" onclick="closeModalDirect()">&#215;</button>
     <div class="modal-header">
       <div class="modal-id" id="mId"></div>
       <div class="modal-name" id="mName"></div>
       <div class="modal-kpis">
-        <div class="modal-kpi">
-          <div class="modal-kpi-label">Receita Total</div>
-          <div class="modal-kpi-val teal" id="mTotal"></div>
-        </div>
-        <div class="modal-kpi">
-          <div class="modal-kpi-label">Média Mensal</div>
-          <div class="modal-kpi-val" id="mMedia"></div>
-        </div>
-        <div class="modal-kpi">
-          <div class="modal-kpi-label">Mar/2026</div>
-          <div class="modal-kpi-val" id="mUltima"></div>
-        </div>
-        <div class="modal-kpi">
-          <div class="modal-kpi-label">Meses Ativos</div>
-          <div class="modal-kpi-val" id="mMeses"></div>
-        </div>
+        <div class="modal-kpi"><div class="modal-kpi-label">Receita Total</div><div class="modal-kpi-val teal" id="mTotal"></div></div>
+        <div class="modal-kpi"><div class="modal-kpi-label">Média Mensal</div><div class="modal-kpi-val" id="mMedia"></div></div>
+        <div class="modal-kpi"><div class="modal-kpi-label">Mar/2026</div><div class="modal-kpi-val" id="mUltima"></div></div>
+        <div class="modal-kpi"><div class="modal-kpi-label">Meses Ativos</div><div class="modal-kpi-val" id="mMeses"></div></div>
       </div>
     </div>
     <div class="modal-body">
-      <div class="modal-section-title">Evolução Mensal</div>
+      <div class="modal-section-title">Evolucao Mensal</div>
       <div class="modal-chart-wrap"><canvas id="modalChart"></canvas></div>
-      <div class="modal-section-title">Histórico Detalhado</div>
+      <div class="modal-section-title">Historico Detalhado</div>
       <table class="modal-table">
         <thead><tr>
-          <th>Mês</th>
-          <th class="num">Ciclos</th>
-          <th class="num">Receita</th>
-          <th class="num">Repasse</th>
-          <th class="num">Líquido</th>
+          <th>Mes</th><th class="num">Ciclos</th><th class="num">Receita</th>
+          <th class="num">Repasse</th><th class="num">Liquido</th>
         </tr></thead>
         <tbody id="mTableBody"></tbody>
       </table>
     </div>
   </div>
 </div>
-
 <script>
-const UNITS = [{"id": 1, "nome": "CONDOMINIO MOOV BELEM", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [12923.5, 11839.5, 13614.0, 14329.5, 15035.5, 15383.0, 15847.0, 14903.0, 14609.0, 15548.5, 31296.0, 28428.0, 28308.0, 31440.0, 33324.0], "ciclos": [1195, 1095, 1260, 1329, 1393, 1430, 1474, 1385, 1355, 1441, 2608, 2369, 2359, 2620, 2777], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 296828.5, "media": 19788.57, "ultima": 33324.0, "meses": 15}, {"id": 2, "nome": "VIVABENX", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [12385.0, 10447.5, 11825.0, 12162.5, 12070.0, 13587.5, 12900.0, 13610.0, 12592.5, 14162.5, 15807.5, 16598.5, 13723.5, 13774.5, 16413.5], "ciclos": [1093, 918, 1042, 1076, 1069, 1210, 1149, 1214, 1122, 1259, 1466, 1537, 1272, 1275, 1520], "repasse": [2073.0, 1247.0, 2580.48, 2416.98, 2234.6, 2463.09, 3006.02, 2827.84, 2213.64, 2060.61, 0, 0, 0, 0, 0], "total": 202060.0, "media": 13470.67, "ultima": 16413.5, "meses": 15}, {"id": 3, "nome": "TURIASSU", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [10140.0, 9130.0, 10490.0, 10590.0, 11145.0, 11190.0, 11620.0, 12410.0, 10836.0, 13704.0, 15002.5, 12787.5, 12092.5, 11500.0, 12760.0], "ciclos": [1014, 913, 1049, 1059, 743, 746, 1162, 1241, 1548, 1142, 1335, 1134, 1072, 1022, 1135], "repasse": [1979.99, 1859.74, 2193.41, 2250.99, 2157.84, 2350.93, 2528.77, 2960.68, 2621.93, 2378.03, 0, 0, 0, 0, 0], "total": 175397.5, "media": 11693.17, "ultima": 12760.0, "meses": 15}, {"id": 4, "nome": "COND. MUNDO APTO PRA\u00c7A DA S\u00c9", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [9555.0, 8897.0, 10437.0, 10515.0, 11120.0, 10280.0, 11472.0, 12236.0, 10400.0, 10620.0, 10055.0, 10595.18, 10243.35, 9924.05, 10629.08], "ciclos": [1365, 1271, 1491, 701, 1112, 1028, 1434, 1748, 1040, 708, 2011, 1248, 1989, 1927, 1252], "repasse": [11155.5, 10503.0, 10503.0, 11547.0, 10291.5, 10152.0, 8581.5, 0, 0, 0, 0, 0, 0, 0, 0], "total": 156978.66, "media": 10465.24, "ultima": 10629.08, "meses": 15}, {"id": 5, "nome": "NYC BERRINE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [9296.0, 8304.0, 9848.0, 9958.0, 9262.5, 10222.5, 10451.0, 10792.0, 9907.5, 9990.0, 10020.0, 9877.0, 9570.0, 9737.68, 10611.0], "ciclos": [1162, 1038, 1231, 1040, 1235, 1363, 1493, 1349, 1321, 999, 1336, 1162, 638, 1147, 1179], "repasse": [293.19, 278.96, 298.27, 356.2, 377.54, 379.06, 351.11, 341.46, 287.09, 359.75, 0, 0, 0, 0, 0], "total": 147847.18, "media": 9856.48, "ultima": 10611.0, "meses": 15}, {"id": 6, "nome": "CONDOMINIO APICE PARK", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8655.0, 8235.0, 9285.0, 9303.0, 9214.0, 9716.0, 10365.0, 10387.0, 9705.0, 9828.0, 9984.0, 9661.4, 9570.0, 8865.0, 10570.0], "ciclos": [577, 549, 1857, 1329, 962, 1388, 691, 1091, 1941, 1404, 1248, 1876, 1276, 985, 755], "repasse": [313.99, 323.34, 333.85, 345.54, 337.75, 351.77, 363.07, 359.95, 356.06, 210.36, 0, 0, 0, 0, 0], "total": 143343.4, "media": 9556.23, "ultima": 10570.0, "meses": 15}, {"id": 7, "nome": "CONDOM\u00cdNIO ALL LIBERDADE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8585.0, 8032.5, 9065.0, 9168.0, 8918.0, 9624.0, 10035.0, 10080.0, 9326.0, 9720.0, 9750.0, 9490.0, 9271.02, 8398.0, 10150.65], "ciclos": [1717, 1071, 1295, 1146, 1274, 1011, 1338, 672, 985, 1296, 650, 1898, 1092, 988, 1971], "repasse": [6204.0, 6489.0, 6861.0, 6561.0, 6504.0, 6309.0, 2502.0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 139613.17, "media": 9307.54, "ultima": 10150.65, "meses": 15}, {"id": 8, "nome": "COMPOSITE DES ARTS", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8340.0, 7932.0, 8805.0, 8725.0, 8870.0, 9435.0, 10030.0, 9965.0, 8475.0, 9580.0, 9114.0, 9375.0, 8650.0, 8325.0, 10147.5], "ciclos": [695, 661, 587, 1745, 1774, 1887, 1055, 1993, 565, 1916, 1302, 1250, 865, 555, 1353], "repasse": [646.18, 591.98, 680.7, 716.48, 751.78, 769.15, 792.35, 745.15, 730.45, 777.43, 0, 0, 0, 0, 0], "total": 135768.5, "media": 9051.23, "ultima": 10147.5, "meses": 15}, {"id": 9, "nome": "VIVA BENX VILA MASCOTE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8331.0, 7895.0, 8772.0, 8312.5, 8528.0, 9400.0, 9685.0, 9690.0, 8432.0, 9002.0, 9110.35, 9225.0, 8610.5, 8245.0, 9849.0], "ciclos": [870, 1579, 731, 875, 1066, 1175, 1937, 1292, 1054, 1286, 1769, 966, 1013, 1649, 1407], "repasse": [407.25, 401.63, 412.13, 411.38, 463.13, 511.13, 501.75, 484.5, 495.38, 486.0, 0, 0, 0, 0, 0], "total": 133087.35, "media": 8872.49, "ultima": 9849.0, "meses": 15}, {"id": 10, "nome": "COND SKY PAULICEIA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8236.5, 7686.0, 8242.5, 8227.5, 8094.0, 9006.0, 8880.0, 8862.0, 8043.0, 7890.0, 9022.0, 9105.0, 8589.0, 8242.5, 9714.0], "ciclos": [867, 1098, 1099, 1097, 852, 948, 740, 1266, 1149, 789, 950, 607, 1227, 1099, 1023], "repasse": [1039.19, 1308.93, 1551.98, 1396.5, 1522.51, 1605.0, 1730.67, 1770.99, 1718.14, 1718.14, 0, 0, 0, 0, 0], "total": 127840.0, "media": 8522.67, "ultima": 9714.0, "meses": 15}, {"id": 11, "nome": "CONDOMINIO FOR CONSOLACAO", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8183.0, 7421.0, 7623.0, 8155.0, 7833.0, 8670.0, 8810.0, 8703.75, 7550.0, 7864.0, 8799.0, 9058.0, 8379.0, 8232.0, 9630.0], "ciclos": [1169, 772, 795, 1165, 1119, 867, 881, 1055, 755, 983, 1257, 1294, 876, 1176, 642], "repasse": [985.0, 732.5, 1072.5, 1097.5, 1230.0, 1020.0, 1355.0, 1552.5, 2610.0, 2446.0, 0, 0, 0, 0, 0], "total": 124910.75, "media": 8327.38, "ultima": 9630.0, "meses": 15}, {"id": 12, "nome": "RAIZES GUILHERMINA ESPERAN\u00c7A", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8145.0, 6925.5, 7505.0, 7110.0, 7161.0, 7730.25, 8448.0, 8700.0, 7430.0, 7837.5, 8450.0, 8648.0, 8360.0, 7973.0, 9450.0], "ciclos": [1086, 729, 790, 711, 868, 937, 1024, 870, 743, 950, 845, 1081, 1672, 1139, 1890], "repasse": [1297.46, 1019.94, 1148.02, 1164.63, 1200.21, 1098.21, 1195.46, 1195.46, 1290.34, 1283.22, 0, 0, 0, 0, 0], "total": 119873.25, "media": 7991.55, "ultima": 9450.0, "meses": 15}, {"id": 13, "nome": "UPSIDE PAULISTA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8037.5, 6674.25, 6897.0, 6852.0, 6780.0, 6984.0, 8421.0, 7428.0, 7103.25, 7738.0, 7951.5, 8568.0, 8224.0, 7907.0, 9290.5], "ciclos": [643, 809, 836, 571, 678, 582, 1203, 619, 861, 812, 837, 1224, 1028, 829, 1093], "repasse": [629.0, 669.0, 826.0, 726.0, 825.0, 764.0, 726.5, 786.0, 718.0, 326.0, 0, 0, 0, 0, 0], "total": 114856.0, "media": 7657.07, "ultima": 9290.5, "meses": 15}, {"id": 14, "nome": "VIBRA CONCEI\u00c7\u00c3O", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [6237.0, 5267.0, 5850.0, 6707.25, 6720.0, 6706.0, 8331.5, 7268.8, 6972.0, 7248.0, 7878.75, 8210.0, 7810.0, 7130.0, 8930.0], "ciclos": [756, 458, 585, 813, 560, 958, 877, 826, 581, 604, 955, 821, 781, 713, 893], "repasse": [953.11, 1020.4, 1089.27, 1222.03, 1302.48, 1350.5, 1332.3, 1337.91, 1315.3, 1315.3, 0, 0, 0, 0, 0], "total": 107266.3, "media": 7151.09, "ultima": 8930.0, "meses": 15}, {"id": 15, "nome": "VIBRA CUPEC\u00ca", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [5680.0, 5190.0, 5508.5, 6160.0, 5310.0, 5930.0, 7644.0, 7012.5, 6897.0, 6697.5, 7760.0, 7713.75, 7230.2, 7088.0, 8808.0], "ciclos": [568, 519, 479, 616, 531, 593, 1092, 561, 726, 705, 776, 935, 1546, 886, 1468], "repasse": [240.1, 208.95, 253.05, 235.2, 261.8, 229.95, 256.2, 254.45, 238.35, 252.7, 0, 0, 0, 0, 0], "total": 100629.45, "media": 6708.63, "ultima": 8808.0, "meses": 15}, {"id": 16, "nome": "VN CASA ALVARO RODRIGUES", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [4802.0, 4179.0, 5310.0, 5485.5, 5236.0, 5007.2, 7268.8, 7010.0, 6272.0, 6591.2, 7720.0, 7130.0, 7175.0, 6940.0, 8560.0], "ciclos": [686, 597, 531, 477, 748, 569, 826, 701, 896, 749, 772, 713, 1025, 694, 856], "repasse": [955.5, 889.7, 1043.7, 815.5, 782.6, 670.6, 764.4, 694.4, 627.2, 644.7, 0, 0, 0, 0, 0], "total": 94686.7, "media": 6312.45, "ultima": 8560.0, "meses": 15}, {"id": 17, "nome": "CONDOMINIO ONZE 22", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [4715.0, 4080.0, 5061.0, 4704.0, 4703.5, 4876.0, 6712.5, 6982.5, 6107.2, 6440.0, 6811.5, 7115.5, 6770.0, 6699.0, 8540.0], "ciclos": [410, 408, 723, 672, 409, 424, 537, 735, 694, 920, 1455, 749, 677, 812, 1220], "repasse": [955.5, 889.7, 1043.7, 815.5, 782.6, 670.6, 764.4, 694.4, 627.2, 644.7, 0, 0, 0, 0, 0], "total": 90317.7, "media": 6021.18, "ultima": 8540.0, "meses": 15}, {"id": 18, "nome": "BRERA MOEMA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [3510.0, 4062.5, 3737.5, 3050.0, 3625.0, 4825.0, 6620.0, 6944.0, 5892.2, 6320.0, 6687.5, 6930.0, 6765.0, 6684.0, 8256.0], "ciclos": [351, 325, 299, 244, 290, 386, 662, 992, 1246, 632, 535, 693, 820, 557, 1376], "repasse": [205.5, 135.0, 201.0, 220.5, 180.0, 181.5, 210.0, 163.5, 186.0, 153.0, 0, 0, 0, 0, 0], "total": 83908.7, "media": 5593.91, "ultima": 8256.0, "meses": 15}, {"id": 19, "nome": "CONDOMINIO UPPER ITAIM", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [3282.0, 2580.0, 2904.0, 2946.0, 3036.0, 4599.0, 5431.5, 6851.7, 5635.0, 6210.0, 6678.0, 6748.0, 6700.0, 6610.0, 8192.25], "ciclos": [547, 430, 484, 491, 506, 657, 808, 1481, 490, 540, 954, 964, 670, 661, 993], "repasse": [982.8, 1142.4, 1486.8, 1724.8, 1486.8, 1660.4, 1853.6, 1962.8, 2968.0, 2524.0, 0, 0, 0, 0, 0], "total": 78403.45, "media": 5226.9, "ultima": 8192.25, "meses": 15}, {"id": 20, "nome": "STUDIO LIVING", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1370.0, 1629.0, 2268.0, 2691.0, 2502.0, 3562.5, 5232.5, 5922.5, 5115.0, 5925.0, 6613.4, 6626.4, 6213.0, 6483.0, 7528.0], "ciclos": [137, 181, 252, 299, 278, 285, 455, 515, 765, 474, 779, 753, 654, 970, 941], "repasse": [1737.5, 1652.5, 1827.5, 1427.5, 1400.0, 1455.0, 1850.0, 1547.5, 1452.5, 1510.0, 0, 0, 0, 0, 0], "total": 69681.3, "media": 4645.42, "ultima": 7528.0, "meses": 15}, {"id": 21, "nome": "VIDA MADALENA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1026.0, 945.2, 1523.2, 2325.0, 2420.8, 3078.0, 5124.0, 5821.5, 4767.0, 5590.3, 6608.8, 6012.0, 6156.0, 6468.0, 7460.0], "ciclos": [114, 139, 224, 186, 356, 342, 732, 874, 681, 1159, 751, 501, 513, 1078, 746], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 65325.8, "media": 4355.05, "ultima": 7460.0, "meses": 15}, {"id": 22, "nome": "TODAY PERDIZES", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [584.8, 900.0, 1340.0, 1509.6, 2400.0, 3019.2, 3800.0, 5089.0, 4575.0, 5311.5, 6252.0, 5880.0, 6142.4, 6335.0, 7326.0], "ciclos": [86, 90, 134, 222, 192, 444, 304, 727, 366, 795, 937, 588, 698, 905, 666], "repasse": [1737.5, 1652.5, 1827.5, 1427.5, 1400.0, 1455.0, 1850.0, 1547.5, 1452.5, 1510.0, 0, 0, 0, 0, 0], "total": 60464.5, "media": 4030.97, "ultima": 7326.0, "meses": 15}, {"id": 23, "nome": "ATMOSFERA 360", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [85.0, 59.5, 569.5, 1470.0, 1200.0, 2778.0, 3375.0, 3825.0, 3834.0, 5054.0, 6216.0, 5442.7, 6006.0, 6308.0, 7277.6], "ciclos": [10, 7, 67, 147, 120, 463, 375, 306, 426, 722, 518, 1131, 858, 664, 827], "repasse": [514.08, 550.12, 590.51, 552.84, 590.24, 637.16, 696.32, 817.6, 710.33, 783.75, 0, 0, 0, 0, 0], "total": 53500.3, "media": 3566.69, "ultima": 7277.6, "meses": 15}, {"id": 24, "nome": "TERRACO BEACH PARQUE", "months": ["Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [487.5, 926.5, 1173.0, 1972.0, 3024.0, 3213.0, 3816.5, 4401.0, 5957.0, 5394.0, 5608.0, 6151.2, 7144.0], "ciclos": [39, 109, 138, 232, 504, 357, 449, 489, 518, 899, 701, 699, 752], "repasse": [762.3, 995.8, 921.4, 962.4, 1003.0, 1038.7, 932.6, 773.8, 0, 0, 0, 0, 0], "total": 49267.7, "media": 3789.82, "ultima": 7144.0, "meses": 13}, {"id": 25, "nome": "PRA\u00c7A S\u00c3O PAULO", "months": ["Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [350.0, 200.0, 1777.6, 2728.0, 3168.8, 3654.0, 4158.0, 5495.0, 5241.0, 5436.0, 6037.5, 7007.0], "ciclos": [35, 20, 202, 310, 466, 609, 693, 785, 782, 813, 525, 1001], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 45252.9, "media": 3771.08, "ultima": 7007.0, "meses": 12}, {"id": 26, "nome": "VIVAZ JARDIM PRUDENCIA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1456.0, 2516.0, 3072.0, 3264.0, 3625.0, 5210.0, 4991.0, 5388.0, 5970.0, 6681.5], "ciclos": [208, 370, 512, 544, 290, 521, 434, 898, 995, 581], "repasse": [2663.4, 3705.3, 3870.9, 2525.4, 2001.0, 0, 0, 0, 0, 0], "total": 42173.5, "media": 4217.35, "ultima": 6681.5, "meses": 10}, {"id": 27, "nome": "STUDIO LIVING", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1210.0, 2354.5, 3062.4, 2917.2, 3544.5, 5202.0, 4697.0, 5066.0, 5808.0, 6520.0], "ciclos": [121, 277, 348, 429, 417, 867, 671, 596, 528, 652], "repasse": [867.0, 881.0, 872.0, 755.0, 789.0, 0, 0, 0, 0, 0], "total": 40381.6, "media": 4038.16, "ultima": 6520.0, "meses": 10}, {"id": 28, "nome": "CORAZ STUDIO", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [892.0, 2167.3, 3024.0, 2915.0, 3461.2, 4842.0, 4450.0, 4895.0, 5442.6, 6444.0], "ciclos": [81, 469, 504, 220, 509, 538, 356, 445, 1198, 537], "repasse": [712.5, 760.0, 765.0, 582.5, 645.0, 0, 0, 0, 0, 0], "total": 38533.1, "media": 3853.31, "ultima": 6444.0, "meses": 10}, {"id": 29, "nome": "SIDE BARRA FUNDA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [652.5, 2075.0, 2756.0, 2912.5, 3246.0, 4394.5, 4425.0, 4800.0, 4563.0, 6319.5], "ciclos": [96, 166, 208, 233, 541, 517, 354, 384, 702, 948], "repasse": [18.5, 60.0, 97.0, 120.0, 107.0, 0, 0, 0, 0, 0], "total": 36144.0, "media": 3614.4, "ultima": 6319.5, "meses": 10}, {"id": 30, "nome": "RESIDENCIAL FORLIFE FREGUESIA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [487.5, 1400.0, 2380.0, 2862.5, 3225.0, 4003.5, 4301.0, 4673.5, 4494.8, 5696.0], "ciclos": [39, 140, 280, 229, 258, 471, 506, 719, 661, 712], "repasse": [51.48, 219.12, 204.6, 302.28, 216.48, 0, 0, 0, 0, 0], "total": 33523.8, "media": 3352.38, "ultima": 5696.0, "meses": 10}, {"id": 31, "nome": "PRA\u00c7A S\u00c3O PAULO", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [370.0, 1242.0, 1940.0, 2631.2, 2748.0, 3699.2, 4175.0, 4462.0, 4352.0, 5570.5], "ciclos": [37, 112, 194, 299, 229, 544, 334, 388, 512, 857], "repasse": [220.32, 319.83, 319.83, 268.72, 290.01, 0, 0, 0, 0, 0], "total": 31189.9, "media": 3118.99, "ultima": 5570.5, "meses": 10}, {"id": 32, "nome": "PRA\u00c7A S\u00c3O PAULO", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1200.0, 1937.5, 2556.0, 2744.95, 3600.0, 3905.0, 4284.0, 4087.5, 5312.5], "ciclos": [120, 155, 213, 533, 288, 355, 612, 327, 425], "repasse": [240.06, 269.49, 231.55, 240.06, 0, 0, 0, 0, 0], "total": 29627.45, "media": 3291.94, "ultima": 5312.5, "meses": 9}, {"id": 33, "nome": "ARIZONA 701", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1056.0, 1536.0, 2400.0, 2729.5, 3537.5, 3588.0, 3879.0, 4060.0, 5224.5], "ciclos": [88, 128, 240, 206, 283, 552, 431, 580, 387], "repasse": [40.22, 67.58, 76.56, 72.86, 0, 0, 0, 0, 0], "total": 28010.5, "media": 3112.28, "ultima": 5224.5, "meses": 9}, {"id": 34, "nome": "RESIDENCIAL UPTOWN AROUCHE", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [781.75, 1470.0, 1900.0, 2719.2, 3388.0, 3270.8, 3821.6, 3937.5, 5181.6], "ciclos": [59, 133, 171, 309, 308, 481, 562, 315, 762], "repasse": [246.4, 292.6, 376.2, 424.6, 0, 0, 0, 0, 0], "total": 26470.45, "media": 2941.16, "ultima": 5181.6, "meses": 9}, {"id": 35, "nome": "RESIDENCIAL VIVART CURITIBA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1188.0, 1740.0, 2142.0, 3306.0, 3258.0, 3512.5, 3875.0, 5103.5], "ciclos": [99, 145, 193, 300, 362, 281, 310, 1135], "repasse": [2228.16, 2022.24, 2265.12, 0, 0, 0, 0, 0], "total": 24125.0, "media": 3015.62, "ultima": 5103.5, "meses": 8}, {"id": 36, "nome": "STUDIO LIVING", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1090.0, 1475.0, 2140.0, 3246.25, 3210.0, 3498.0, 3708.0, 4930.0], "ciclos": [109, 118, 214, 245, 535, 318, 412, 580], "repasse": [301.47, 259.26, 245.97, 0, 0, 0, 0, 0], "total": 23297.25, "media": 2912.16, "ultima": 4930.0, "meses": 8}, {"id": 37, "nome": "CONDOM\u00cdNIO SAMPA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [896.0, 1302.0, 2050.0, 3036.0, 2940.0, 3402.0, 3520.0, 4752.0], "ciclos": [64, 93, 164, 506, 266, 378, 320, 432], "repasse": [769.12, 672.32, 699.6, 0, 0, 0, 0, 0], "total": 21898.0, "media": 2737.25, "ultima": 4752.0, "meses": 8}, {"id": 38, "nome": "ESTILO BARROCO NR", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [769.5, 1240.0, 2002.0, 2982.0, 2875.25, 3348.0, 3501.0, 4575.0], "ciclos": [57, 124, 143, 213, 217, 372, 389, 366], "repasse": [457.6, 484.0, 453.2, 0, 0, 0, 0, 0], "total": 21292.75, "media": 2661.59, "ultima": 4575.0, "meses": 8}, {"id": 39, "nome": "CONDOM\u00cdNIO TERRA\u00c7O REP\u00daBLICA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [476.0, 999.0, 1656.0, 2630.0, 2706.0, 3300.0, 3067.5, 4557.0], "ciclos": [34, 74, 138, 263, 246, 264, 409, 651], "repasse": [26.07, 33.84, 32.93, 0, 0, 0, 0, 0], "total": 19391.5, "media": 2423.94, "ultima": 4557.0, "meses": 8}, {"id": 40, "nome": "CONDOM\u00cdNIO TERRA\u00c7O REP\u00daBLICA", "months": ["Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [840.0, 1540.0, 2543.2, 2631.2, 2915.0, 3042.0, 4392.0], "ciclos": [60, 140, 289, 299, 220, 276, 488], "repasse": [127.8, 137.4, 0, 0, 0, 0, 0], "total": 17903.4, "media": 2557.63, "ultima": 4392.0, "meses": 7}, {"id": 41, "nome": "RESIDENCIAL GARDEN", "months": ["Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [559.0, 1391.0, 2280.0, 2496.0, 2691.0, 2864.0, 4372.0], "ciclos": [43, 107, 190, 192, 207, 358, 397], "repasse": [44.11, 46.95, 0, 0, 0, 0, 0], "total": 16653.0, "media": 2379.0, "ultima": 4372.0, "meses": 7}, {"id": 42, "nome": "CONDOM\u00cdNIO SAMPA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1386.0, 2275.0, 2208.0, 2586.0, 2742.75, 4185.0], "ciclos": [99, 182, 184, 431, 207, 558], "repasse": [67.82, 0, 0, 0, 0, 0], "total": 15382.75, "media": 2563.79, "ultima": 4185.0, "meses": 6}, {"id": 43, "nome": "STUDIO LIVING", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1020.0, 2002.0, 2114.0, 2431.0, 2710.0, 3936.0], "ciclos": [102, 154, 151, 221, 271, 656], "repasse": [702.23, 0, 0, 0, 0, 0], "total": 14213.0, "media": 2368.83, "ultima": 3936.0, "meses": 6}, {"id": 44, "nome": "ESTILO BARROCO NR", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [972.0, 1944.0, 1904.0, 2217.6, 2691.0, 3835.0], "ciclos": [72, 162, 136, 252, 207, 295], "repasse": [1123.97, 0, 0, 0, 0, 0], "total": 13563.6, "media": 2260.6, "ultima": 3835.0, "meses": 6}, {"id": 45, "nome": "CONDOM\u00cdNIO PASSO DIADEMA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [325.0, 1539.0, 1896.0, 2160.0, 2604.0, 3825.0], "ciclos": [26, 114, 158, 216, 186, 425], "repasse": [47.12, 0, 0, 0, 0, 0], "total": 12349.0, "media": 2058.17, "ultima": 3825.0, "meses": 6}, {"id": 46, "nome": "CONDOM\u00cdNIO ESQUINA PAULICEIA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [40.0, 1225.0, 1725.0, 2122.0, 2568.0, 3550.0], "ciclos": [4, 98, 138, 193, 428, 284], "repasse": [0, 0, 0, 0, 0, 0], "total": 11230.0, "media": 1871.67, "ultima": 3550.0, "meses": 6}, {"id": 47, "nome": "CONDOM\u00cdNIO SAMPA", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1218.0, 1620.0, 2106.0, 2376.0, 3444.0], "ciclos": [87, 162, 156, 176, 246], "repasse": [0, 0, 0, 0, 0], "total": 10764.0, "media": 2152.8, "ultima": 3444.0, "meses": 5}, {"id": 48, "nome": "STUDIO LIVING", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [860.0, 1512.0, 1908.0, 2349.0, 3288.0], "ciclos": [86, 168, 159, 174, 411], "repasse": [0, 0, 0, 0, 0], "total": 9917.0, "media": 1983.4, "ultima": 3288.0, "meses": 5}, {"id": 49, "nome": "DEZ GAMELINHA", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [90.0, 1162.5, 1872.0, 2250.0, 3230.0], "ciclos": [6, 93, 234, 150, 646], "repasse": [0, 0, 0, 0, 0], "total": 8604.5, "media": 1720.9, "ultima": 3230.0, "meses": 5}, {"id": 50, "nome": "ESTILO BARROCO NR", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1147.5, 1834.0, 2217.6, 2990.0], "ciclos": [85, 131, 252, 299], "repasse": [0, 0, 0, 0], "total": 8189.1, "media": 2047.28, "ultima": 2990.0, "meses": 4}, {"id": 51, "nome": "PRA\u00c7A S\u00c3O PAULO", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [970.0, 1815.0, 1826.0, 2954.75], "ciclos": [97, 121, 166, 223], "repasse": [0, 0, 0, 0], "total": 7565.75, "media": 1891.44, "ultima": 2954.75, "meses": 4}, {"id": 52, "nome": "DNA PAULISTA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [935.0, 1704.0, 1788.75, 2904.0], "ciclos": [85, 284, 135, 264], "repasse": [0, 0, 0, 0], "total": 7331.75, "media": 1832.94, "ultima": 2904.0, "meses": 4}, {"id": 53, "nome": "STUDIO LIVING", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [770.0, 1488.0, 1788.0, 2833.6], "ciclos": [77, 124, 149, 322], "repasse": [0, 0, 0, 0], "total": 6879.6, "media": 1719.9, "ultima": 2833.6, "meses": 4}, {"id": 54, "nome": "CONDOMINIO RESIDENCIAL JARDIM DAS ARTES", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [728.75, 1487.5, 1680.0, 2745.0], "ciclos": [55, 119, 140, 183], "repasse": [0, 0, 0, 0], "total": 6641.25, "media": 1660.31, "ultima": 2745.0, "meses": 4}, {"id": 55, "nome": "VIBRA SANTANA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [684.0, 1450.0, 1587.5, 2712.5], "ciclos": [57, 116, 127, 217], "repasse": [0, 0, 0, 0], "total": 6434.0, "media": 1608.5, "ultima": 2712.5, "meses": 4}, {"id": 56, "nome": "MODERN ESTA\u00c7\u00c3O BUTANT\u00c3", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [469.2, 1344.0, 1476.0, 2625.0], "ciclos": [51, 112, 123, 210], "repasse": [0, 0, 0, 0], "total": 5914.2, "media": 1478.55, "ultima": 2625.0, "meses": 4}, {"id": 57, "nome": "CONDOMINIO CONJUNTO NOVO BUTANT\u00c3", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [387.5, 1204.0, 1375.0, 2619.0], "ciclos": [31, 86, 110, 194], "repasse": [0, 0, 0, 0], "total": 5585.5, "media": 1396.38, "ultima": 2619.0, "meses": 4}, {"id": 58, "nome": "METRO CASA VILA EMA II", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [264.0, 1046.75, 1140.8, 2355.2], "ciclos": [33, 79, 124, 256], "repasse": [0, 0, 0, 0], "total": 4806.75, "media": 1201.69, "ultima": 2355.2, "meses": 4}, {"id": 59, "nome": "WELCONX VILA OLIMPIA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [55.2, 990.0, 864.0, 2186.25], "ciclos": [6, 99, 72, 165], "repasse": [0, 0, 0, 0], "total": 4095.45, "media": 1023.86, "ultima": 2186.25, "meses": 4}, {"id": 60, "nome": "STUDIO LIVING", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [780.0, 854.0, 2160.0], "ciclos": [78, 61, 180], "repasse": [0, 0, 0], "total": 3794.0, "media": 1264.67, "ultima": 2160.0, "meses": 3}, {"id": 61, "nome": "MODERN ESTA\u00c7\u00c3O BUTANT\u00c3", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [671.6, 840.0, 1848.0], "ciclos": [73, 60, 154], "repasse": [0, 0, 0], "total": 3359.6, "media": 1119.87, "ultima": 1848.0, "meses": 3}, {"id": 62, "nome": "WELCONX VILA OLIMPIA", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [653.2, 800.4, 1824.0], "ciclos": [71, 87, 152], "repasse": [0, 0, 0], "total": 3277.6, "media": 1092.53, "ultima": 1824.0, "meses": 3}, {"id": 63, "nome": "CONDOMINIO CONJUNTO NOVO BUTANT\u00c3", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [387.5, 740.0, 1675.0], "ciclos": [31, 74, 134], "repasse": [0, 0, 0], "total": 2802.5, "media": 934.17, "ultima": 1675.0, "meses": 3}, {"id": 64, "nome": "CONDOMINIO GRAVURA PERDIZES", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [337.5, 737.5, 1640.0], "ciclos": [45, 59, 205], "repasse": [0, 0, 0], "total": 2715.0, "media": 905.0, "ultima": 1640.0, "meses": 3}, {"id": 65, "nome": "AMBIENCE VILA MARIANA", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [77.0, 575.0, 1628.4], "ciclos": [11, 46, 177], "repasse": [0, 0, 0], "total": 2280.4, "media": 760.13, "ultima": 1628.4, "meses": 3}, {"id": 66, "nome": "ALPHAVIEW", "months": ["Fev/26", "Mar/26"], "receita": [420.0, 1612.5], "ciclos": [30, 129], "repasse": [0, 0], "total": 2032.5, "media": 1016.25, "ultima": 1612.5, "meses": 2}, {"id": 67, "nome": "N URBAN VILA MARIANA", "months": ["Fev/26", "Mar/26"], "receita": [420.0, 1606.5], "ciclos": [30, 119], "repasse": [0, 0], "total": 2026.5, "media": 1013.25, "ultima": 1606.5, "meses": 2}, {"id": 68, "nome": "AMBIENCE VILA MARIANA", "months": ["Fev/26", "Mar/26"], "receita": [336.0, 1582.0], "ciclos": [48, 113], "repasse": [0, 0], "total": 1918.0, "media": 959.0, "ultima": 1582.0, "meses": 2}, {"id": 69, "nome": "GIGRAN", "months": ["Fev/26", "Mar/26"], "receita": [301.4, 1251.0], "ciclos": [30, 139], "repasse": [0, 0], "total": 1552.4, "media": 776.2, "ultima": 1251.0, "meses": 2}, {"id": 70, "nome": "MISTRAL", "months": ["Fev/26", "Mar/26"], "receita": [121.5, 1162.0], "ciclos": [9, 83], "repasse": [0, 0], "total": 1283.5, "media": 641.75, "ultima": 1162.0, "meses": 2}, {"id": 71, "nome": "PERDIZES ABSOLUTO", "months": ["Fev/26", "Mar/26"], "receita": [115.0, 1128.0], "ciclos": [23, 94], "repasse": [0, 0], "total": 1243.0, "media": 621.5, "ultima": 1128.0, "meses": 2}, {"id": 72, "nome": "PRA\u00c7A S\u00c3O PAULO", "months": ["Fev/26", "Mar/26"], "receita": [50.0, 986.0], "ciclos": [5, 68], "repasse": [0, 0], "total": 1036.0, "media": 518.0, "ultima": 986.0, "meses": 2}, {"id": 73, "nome": "NEX ONE JO\u00c3O CACHOEIRA", "months": ["Fev/26", "Mar/26"], "receita": [40.0, 938.0], "ciclos": [4, 67], "repasse": [0, 0], "total": 978.0, "media": 489.0, "ultima": 938.0, "meses": 2}, {"id": 74, "nome": "TSS BOM FIM", "months": ["Fev/26", "Mar/26"], "receita": [20.0, 850.0], "ciclos": [2, 85], "repasse": [0, 0], "total": 870.0, "media": 435.0, "ultima": 850.0, "meses": 2}, {"id": 75, "nome": "CONDOMINIO TURIASSU", "months": ["Fev/26", "Mar/26"], "receita": [0.0, 750.0], "ciclos": [802, 75], "repasse": [0, 0], "total": 750.0, "media": 375.0, "ultima": 750.0, "meses": 2}, {"id": 76, "nome": "ZOOM SANTA CECILIA (RESIDENCIAL)", "months": ["Fev/26", "Mar/26"], "receita": [0.0, 537.5], "ciclos": [857, 43], "repasse": [0, 0], "total": 537.5, "media": 268.75, "ultima": 537.5, "meses": 2}, {"id": 77, "nome": "NEX ONE JO\u00c3O CACHOEIRA", "months": ["Mar/26"], "receita": [500.0], "ciclos": [50], "repasse": [0], "total": 500.0, "media": 500.0, "ultima": 500.0, "meses": 1}, {"id": 78, "nome": "AMBIENCE VILA MARIANA", "months": ["Mar/26"], "receita": [364.0], "ciclos": [52], "repasse": [0], "total": 364.0, "media": 364.0, "ultima": 364.0, "meses": 1}, {"id": 79, "nome": "GIGRAN", "months": ["Mar/26"], "receita": [201.0], "ciclos": [20], "repasse": [0], "total": 201.0, "media": 201.0, "ultima": 201.0, "meses": 1}, {"id": 80, "nome": "VITAL HOME PARQUE BUTANT\u00c3 NR", "months": ["Mar/26"], "receita": [153.0], "ciclos": [17], "repasse": [0], "total": 153.0, "media": 153.0, "ultima": 153.0, "meses": 1}];
-const PURPLE='#6B4EC2', TEAL='#00C896', LAVENDER='#EDEAF8';
+const UNITS = [{"id": 1, "nome": "CONDOMINIO MOOV BELEM", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [12923.5, 11839.5, 13614.0, 14329.5, 15035.5, 15383.0, 15847.0, 14903.0, 14609.0, 15548.5, 31296.0, 28428.0, 28308.0, 31440.0, 33324.0], "ciclos": [1195, 1095, 1260, 1329, 1393, 1430, 1474, 1385, 1355, 1441, 2608, 2369, 2359, 2620, 2777], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 296828.5, "media": 19788.57, "ultima": 33324.0, "meses": 15}, {"id": 2, "nome": "VIVABENX", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [12385.0, 10447.5, 11825.0, 12162.5, 12070.0, 13587.5, 12900.0, 13610.0, 12592.5, 14162.5, 15807.5, 16598.5, 13723.5, 13774.5, 16413.5], "ciclos": [1093, 918, 1042, 1076, 1069, 1210, 1149, 1214, 1122, 1259, 1466, 1537, 1272, 1275, 1520], "repasse": [2073.0, 1247.0, 2580.48, 2416.98, 2234.6, 2463.09, 3006.02, 2827.84, 2213.64, 2060.61, 0, 0, 0, 0, 0], "total": 202060.0, "media": 13470.67, "ultima": 16413.5, "meses": 15}, {"id": 3, "nome": "TURIASSU", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [10140.0, 9130.0, 10490.0, 10590.0, 11145.0, 11190.0, 11620.0, 12410.0, 10836.0, 13704.0, 15002.5, 12787.5, 12092.5, 11500.0, 12760.0], "ciclos": [1014, 913, 1049, 1059, 743, 746, 1162, 1241, 1548, 1142, 1335, 1134, 1072, 1022, 1135], "repasse": [1979.99, 1859.74, 2193.41, 2250.99, 2157.84, 2350.93, 2528.77, 2960.68, 2621.93, 2378.03, 0, 0, 0, 0, 0], "total": 175397.5, "media": 11693.17, "ultima": 12760.0, "meses": 15}, {"id": 4, "nome": "COND. MUNDO APTO PRAÇA DA SÉ", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [9555.0, 8897.0, 10437.0, 10515.0, 11120.0, 10280.0, 11472.0, 12236.0, 10400.0, 10620.0, 10055.0, 10595.18, 10243.35, 9924.05, 10629.08], "ciclos": [1365, 1271, 1491, 701, 1112, 1028, 1434, 1748, 1040, 708, 2011, 1248, 1989, 1927, 1252], "repasse": [11155.5, 10503.0, 10503.0, 11547.0, 10291.5, 10152.0, 8581.5, 0, 0, 0, 0, 0, 0, 0, 0], "total": 156978.66, "media": 10465.24, "ultima": 10629.08, "meses": 15}, {"id": 5, "nome": "NYC BERRINE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [9296.0, 8304.0, 9848.0, 9958.0, 9262.5, 10222.5, 10451.0, 10792.0, 9907.5, 9990.0, 10020.0, 9877.0, 9570.0, 9737.68, 10611.0], "ciclos": [1162, 1038, 1231, 1040, 1235, 1363, 1493, 1349, 1321, 999, 1336, 1162, 638, 1147, 1179], "repasse": [293.19, 278.96, 298.27, 356.2, 377.54, 379.06, 351.11, 341.46, 287.09, 359.75, 0, 0, 0, 0, 0], "total": 147847.18, "media": 9856.48, "ultima": 10611.0, "meses": 15}, {"id": 6, "nome": "CONDOMINIO APICE PARK", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8655.0, 8235.0, 9285.0, 9303.0, 9214.0, 9716.0, 10365.0, 10387.0, 9705.0, 9828.0, 9984.0, 9661.4, 9570.0, 8865.0, 10570.0], "ciclos": [577, 549, 1857, 1329, 962, 1388, 691, 1091, 1941, 1404, 1248, 1876, 1276, 985, 755], "repasse": [313.99, 323.34, 333.85, 345.54, 337.75, 351.77, 363.07, 359.95, 356.06, 210.36, 0, 0, 0, 0, 0], "total": 143343.4, "media": 9556.23, "ultima": 10570.0, "meses": 15}, {"id": 7, "nome": "CONDOMÍNIO ALL LIBERDADE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8585.0, 8032.5, 9065.0, 9168.0, 8918.0, 9624.0, 10035.0, 10080.0, 9326.0, 9720.0, 9750.0, 9490.0, 9271.02, 8398.0, 10150.65], "ciclos": [1717, 1071, 1295, 1146, 1274, 1011, 1338, 672, 985, 1296, 650, 1898, 1092, 988, 1971], "repasse": [6204.0, 6489.0, 6861.0, 6561.0, 6504.0, 6309.0, 2502.0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 139613.17, "media": 9307.54, "ultima": 10150.65, "meses": 15}, {"id": 8, "nome": "COMPOSITE DES ARTS", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8340.0, 7932.0, 8805.0, 8725.0, 8870.0, 9435.0, 10030.0, 9965.0, 8475.0, 9580.0, 9114.0, 9375.0, 8650.0, 8325.0, 10147.5], "ciclos": [695, 661, 587, 1745, 1774, 1887, 1055, 1993, 565, 1916, 1302, 1250, 865, 555, 1353], "repasse": [646.18, 591.98, 680.7, 716.48, 751.78, 769.15, 792.35, 745.15, 730.45, 777.43, 0, 0, 0, 0, 0], "total": 135768.5, "media": 9051.23, "ultima": 10147.5, "meses": 15}, {"id": 9, "nome": "VIVA BENX VILA MASCOTE", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8331.0, 7895.0, 8772.0, 8312.5, 8528.0, 9400.0, 9685.0, 9690.0, 8432.0, 9002.0, 9110.35, 9225.0, 8610.5, 8245.0, 9849.0], "ciclos": [870, 1579, 731, 875, 1066, 1175, 1937, 1292, 1054, 1286, 1769, 966, 1013, 1649, 1407], "repasse": [407.25, 401.63, 412.13, 411.38, 463.13, 511.13, 501.75, 484.5, 495.38, 486.0, 0, 0, 0, 0, 0], "total": 133087.35, "media": 8872.49, "ultima": 9849.0, "meses": 15}, {"id": 10, "nome": "COND SKY PAULICEIA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8236.5, 7686.0, 8242.5, 8227.5, 8094.0, 9006.0, 8880.0, 8862.0, 8043.0, 7890.0, 9022.0, 9105.0, 8589.0, 8242.5, 9714.0], "ciclos": [867, 1098, 1099, 1097, 852, 948, 740, 1266, 1149, 789, 950, 607, 1227, 1099, 1023], "repasse": [1039.19, 1308.93, 1551.98, 1396.5, 1522.51, 1605.0, 1730.67, 1770.99, 1718.14, 1718.14, 0, 0, 0, 0, 0], "total": 127840.0, "media": 8522.67, "ultima": 9714.0, "meses": 15}, {"id": 11, "nome": "CONDOMINIO FOR CONSOLACAO", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8183.0, 7421.0, 7623.0, 8155.0, 7833.0, 8670.0, 8810.0, 8703.75, 7550.0, 7864.0, 8799.0, 9058.0, 8379.0, 8232.0, 9630.0], "ciclos": [1169, 772, 795, 1165, 1119, 867, 881, 1055, 755, 983, 1257, 1294, 876, 1176, 642], "repasse": [985.0, 732.5, 1072.5, 1097.5, 1230.0, 1020.0, 1355.0, 1552.5, 2610.0, 2446.0, 0, 0, 0, 0, 0], "total": 124910.75, "media": 8327.38, "ultima": 9630.0, "meses": 15}, {"id": 12, "nome": "RAIZES GUILHERMINA ESPERANÇA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8145.0, 6925.5, 7505.0, 7110.0, 7161.0, 7730.25, 8448.0, 8700.0, 7430.0, 7837.5, 8450.0, 8648.0, 8360.0, 7973.0, 9450.0], "ciclos": [1086, 729, 790, 711, 868, 937, 1024, 870, 743, 950, 845, 1081, 1672, 1139, 1890], "repasse": [1297.46, 1019.94, 1148.02, 1164.63, 1200.21, 1098.21, 1195.46, 1195.46, 1290.34, 1283.22, 0, 0, 0, 0, 0], "total": 119873.25, "media": 7991.55, "ultima": 9450.0, "meses": 15}, {"id": 13, "nome": "UPSIDE PAULISTA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [8037.5, 6674.25, 6897.0, 6852.0, 6780.0, 6984.0, 8421.0, 7428.0, 7103.25, 7738.0, 7951.5, 8568.0, 8224.0, 7907.0, 9290.5], "ciclos": [643, 809, 836, 571, 678, 582, 1203, 619, 861, 812, 837, 1224, 1028, 829, 1093], "repasse": [629.0, 669.0, 826.0, 726.0, 825.0, 764.0, 726.5, 786.0, 718.0, 326.0, 0, 0, 0, 0, 0], "total": 114856.0, "media": 7657.07, "ultima": 9290.5, "meses": 15}, {"id": 14, "nome": "VIBRA CONCEIÇÃO", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [6237.0, 5267.0, 5850.0, 6707.25, 6720.0, 6706.0, 8331.5, 7268.8, 6972.0, 7248.0, 7878.75, 8210.0, 7810.0, 7130.0, 8930.0], "ciclos": [756, 458, 585, 813, 560, 958, 877, 826, 581, 604, 955, 821, 781, 713, 893], "repasse": [953.11, 1020.4, 1089.27, 1222.03, 1302.48, 1350.5, 1332.3, 1337.91, 1315.3, 1315.3, 0, 0, 0, 0, 0], "total": 107266.3, "media": 7151.09, "ultima": 8930.0, "meses": 15}, {"id": 15, "nome": "VIBRA CUPECÊ", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [5680.0, 5190.0, 5508.5, 6160.0, 5310.0, 5930.0, 7644.0, 7012.5, 6897.0, 6697.5, 7760.0, 7713.75, 7230.2, 7088.0, 8808.0], "ciclos": [568, 519, 479, 616, 531, 593, 1092, 561, 726, 705, 776, 935, 1546, 886, 1468], "repasse": [240.1, 208.95, 253.05, 235.2, 261.8, 229.95, 256.2, 254.45, 238.35, 252.7, 0, 0, 0, 0, 0], "total": 100629.45, "media": 6708.63, "ultima": 8808.0, "meses": 15}, {"id": 16, "nome": "VN CASA ALVARO RODRIGUES", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [4802.0, 4179.0, 5310.0, 5485.5, 5236.0, 5007.2, 7268.8, 7010.0, 6272.0, 6591.2, 7720.0, 7130.0, 7175.0, 6940.0, 8560.0], "ciclos": [686, 597, 531, 477, 748, 569, 826, 701, 896, 749, 772, 713, 1025, 694, 856], "repasse": [955.5, 889.7, 1043.7, 815.5, 782.6, 670.6, 764.4, 694.4, 627.2, 644.7, 0, 0, 0, 0, 0], "total": 94686.7, "media": 6312.45, "ultima": 8560.0, "meses": 15}, {"id": 17, "nome": "CONDOMINIO ONZE 22", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [4715.0, 4080.0, 5061.0, 4704.0, 4703.5, 4876.0, 6712.5, 6982.5, 6107.2, 6440.0, 6811.5, 7115.5, 6770.0, 6699.0, 8540.0], "ciclos": [410, 408, 723, 672, 409, 424, 537, 735, 694, 920, 1455, 749, 677, 812, 1220], "repasse": [955.5, 889.7, 1043.7, 815.5, 782.6, 670.6, 764.4, 694.4, 627.2, 644.7, 0, 0, 0, 0, 0], "total": 90317.7, "media": 6021.18, "ultima": 8540.0, "meses": 15}, {"id": 18, "nome": "BRERA MOEMA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [3510.0, 4062.5, 3737.5, 3050.0, 3625.0, 4825.0, 6620.0, 6944.0, 5892.2, 6320.0, 6687.5, 6930.0, 6765.0, 6684.0, 8256.0], "ciclos": [351, 325, 299, 244, 290, 386, 662, 992, 1246, 632, 535, 693, 820, 557, 1376], "repasse": [205.5, 135.0, 201.0, 220.5, 180.0, 181.5, 210.0, 163.5, 186.0, 153.0, 0, 0, 0, 0, 0], "total": 83908.7, "media": 5593.91, "ultima": 8256.0, "meses": 15}, {"id": 19, "nome": "CONDOMINIO UPPER ITAIM", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [3282.0, 2580.0, 2904.0, 2946.0, 3036.0, 4599.0, 5431.5, 6851.7, 5635.0, 6210.0, 6678.0, 6748.0, 6700.0, 6610.0, 8192.25], "ciclos": [547, 430, 484, 491, 506, 657, 808, 1481, 490, 540, 954, 964, 670, 661, 993], "repasse": [982.8, 1142.4, 1486.8, 1724.8, 1486.8, 1660.4, 1853.6, 1962.8, 2968.0, 2524.0, 0, 0, 0, 0, 0], "total": 78403.45, "media": 5226.9, "ultima": 8192.25, "meses": 15}, {"id": 20, "nome": "STUDIO LIVING", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1370.0, 1629.0, 2268.0, 2691.0, 2502.0, 3562.5, 5232.5, 5922.5, 5115.0, 5925.0, 6613.4, 6626.4, 6213.0, 6483.0, 7528.0], "ciclos": [137, 181, 252, 299, 278, 285, 455, 515, 765, 474, 779, 753, 654, 970, 941], "repasse": [1737.5, 1652.5, 1827.5, 1427.5, 1400.0, 1455.0, 1850.0, 1547.5, 1452.5, 1510.0, 0, 0, 0, 0, 0], "total": 69681.3, "media": 4645.42, "ultima": 7528.0, "meses": 15}, {"id": 21, "nome": "VIDA MADALENA", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1026.0, 945.2, 1523.2, 2325.0, 2420.8, 3078.0, 5124.0, 5821.5, 4767.0, 5590.3, 6608.8, 6012.0, 6156.0, 6468.0, 7460.0], "ciclos": [114, 139, 224, 186, 356, 342, 732, 874, 681, 1159, 751, 501, 513, 1078, 746], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 65325.8, "media": 4355.05, "ultima": 7460.0, "meses": 15}, {"id": 22, "nome": "TODAY PERDIZES", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [584.8, 900.0, 1340.0, 1509.6, 2400.0, 3019.2, 3800.0, 5089.0, 4575.0, 5311.5, 6252.0, 5880.0, 6142.4, 6335.0, 7326.0], "ciclos": [86, 90, 134, 222, 192, 444, 304, 727, 366, 795, 937, 588, 698, 905, 666], "repasse": [1737.5, 1652.5, 1827.5, 1427.5, 1400.0, 1455.0, 1850.0, 1547.5, 1452.5, 1510.0, 0, 0, 0, 0, 0], "total": 60464.5, "media": 4030.97, "ultima": 7326.0, "meses": 15}, {"id": 23, "nome": "ATMOSFERA 360", "months": ["Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [85.0, 59.5, 569.5, 1470.0, 1200.0, 2778.0, 3375.0, 3825.0, 3834.0, 5054.0, 6216.0, 5442.7, 6006.0, 6308.0, 7277.6], "ciclos": [10, 7, 67, 147, 120, 463, 375, 306, 426, 722, 518, 1131, 858, 664, 827], "repasse": [514.08, 550.12, 590.51, 552.84, 590.24, 637.16, 696.32, 817.6, 710.33, 783.75, 0, 0, 0, 0, 0], "total": 53500.3, "media": 3566.69, "ultima": 7277.6, "meses": 15}, {"id": 24, "nome": "TERRACO BEACH PARQUE", "months": ["Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [487.5, 926.5, 1173.0, 1972.0, 3024.0, 3213.0, 3816.5, 4401.0, 5957.0, 5394.0, 5608.0, 6151.2, 7144.0], "ciclos": [39, 109, 138, 232, 504, 357, 449, 489, 518, 899, 701, 699, 752], "repasse": [762.3, 995.8, 921.4, 962.4, 1003.0, 1038.7, 932.6, 773.8, 0, 0, 0, 0, 0], "total": 49267.7, "media": 3789.82, "ultima": 7144.0, "meses": 13}, {"id": 25, "nome": "PRAÇA SÃO PAULO", "months": ["Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [350.0, 200.0, 1777.6, 2728.0, 3168.8, 3654.0, 4158.0, 5495.0, 5241.0, 5436.0, 6037.5, 7007.0], "ciclos": [35, 20, 202, 310, 466, 609, 693, 785, 782, 813, 525, 1001], "repasse": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "total": 45252.9, "media": 3771.08, "ultima": 7007.0, "meses": 12}, {"id": 26, "nome": "VIVAZ JARDIM PRUDENCIA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1456.0, 2516.0, 3072.0, 3264.0, 3625.0, 5210.0, 4991.0, 5388.0, 5970.0, 6681.5], "ciclos": [208, 370, 512, 544, 290, 521, 434, 898, 995, 581], "repasse": [2663.4, 3705.3, 3870.9, 2525.4, 2001.0, 0, 0, 0, 0, 0], "total": 42173.5, "media": 4217.35, "ultima": 6681.5, "meses": 10}, {"id": 27, "nome": "STUDIO LIVING", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1210.0, 2354.5, 3062.4, 2917.2, 3544.5, 5202.0, 4697.0, 5066.0, 5808.0, 6520.0], "ciclos": [121, 277, 348, 429, 417, 867, 671, 596, 528, 652], "repasse": [867.0, 881.0, 872.0, 755.0, 789.0, 0, 0, 0, 0, 0], "total": 40381.6, "media": 4038.16, "ultima": 6520.0, "meses": 10}, {"id": 28, "nome": "CORAZ STUDIO", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [892.0, 2167.3, 3024.0, 2915.0, 3461.2, 4842.0, 4450.0, 4895.0, 5442.6, 6444.0], "ciclos": [81, 469, 504, 220, 509, 538, 356, 445, 1198, 537], "repasse": [712.5, 760.0, 765.0, 582.5, 645.0, 0, 0, 0, 0, 0], "total": 38533.1, "media": 3853.31, "ultima": 6444.0, "meses": 10}, {"id": 29, "nome": "SIDE BARRA FUNDA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [652.5, 2075.0, 2756.0, 2912.5, 3246.0, 4394.5, 4425.0, 4800.0, 4563.0, 6319.5], "ciclos": [96, 166, 208, 233, 541, 517, 354, 384, 702, 948], "repasse": [18.5, 60.0, 97.0, 120.0, 107.0, 0, 0, 0, 0, 0], "total": 36144.0, "media": 3614.4, "ultima": 6319.5, "meses": 10}, {"id": 30, "nome": "RESIDENCIAL FORLIFE FREGUESIA", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [487.5, 1400.0, 2380.0, 2862.5, 3225.0, 4003.5, 4301.0, 4673.5, 4494.8, 5696.0], "ciclos": [39, 140, 280, 229, 258, 471, 506, 719, 661, 712], "repasse": [51.48, 219.12, 204.6, 302.28, 216.48, 0, 0, 0, 0, 0], "total": 33523.8, "media": 3352.38, "ultima": 5696.0, "meses": 10}, {"id": 31, "nome": "PRAÇA SÃO PAULO", "months": ["Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [370.0, 1242.0, 1940.0, 2631.2, 2748.0, 3699.2, 4175.0, 4462.0, 4352.0, 5570.5], "ciclos": [37, 112, 194, 299, 229, 544, 334, 388, 512, 857], "repasse": [220.32, 319.83, 319.83, 268.72, 290.01, 0, 0, 0, 0, 0], "total": 31189.9, "media": 3118.99, "ultima": 5570.5, "meses": 10}, {"id": 32, "nome": "PRAÇA SÃO PAULO", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1200.0, 1937.5, 2556.0, 2744.95, 3600.0, 3905.0, 4284.0, 4087.5, 5312.5], "ciclos": [120, 155, 213, 533, 288, 355, 612, 327, 425], "repasse": [240.06, 269.49, 231.55, 240.06, 0, 0, 0, 0, 0], "total": 29627.45, "media": 3291.94, "ultima": 5312.5, "meses": 9}, {"id": 33, "nome": "ARIZONA 701", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1056.0, 1536.0, 2400.0, 2729.5, 3537.5, 3588.0, 3879.0, 4060.0, 5224.5], "ciclos": [88, 128, 240, 206, 283, 552, 431, 580, 387], "repasse": [40.22, 67.58, 76.56, 72.86, 0, 0, 0, 0, 0], "total": 28010.5, "media": 3112.28, "ultima": 5224.5, "meses": 9}, {"id": 34, "nome": "RESIDENCIAL UPTOWN AROUCHE", "months": ["Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [781.75, 1470.0, 1900.0, 2719.2, 3388.0, 3270.8, 3821.6, 3937.5, 5181.6], "ciclos": [59, 133, 171, 309, 308, 481, 562, 315, 762], "repasse": [246.4, 292.6, 376.2, 424.6, 0, 0, 0, 0, 0], "total": 26470.45, "media": 2941.16, "ultima": 5181.6, "meses": 9}, {"id": 35, "nome": "RESIDENCIAL VIVART CURITIBA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1188.0, 1740.0, 2142.0, 3306.0, 3258.0, 3512.5, 3875.0, 5103.5], "ciclos": [99, 145, 193, 300, 362, 281, 310, 1135], "repasse": [2228.16, 2022.24, 2265.12, 0, 0, 0, 0, 0], "total": 24125.0, "media": 3015.62, "ultima": 5103.5, "meses": 8}, {"id": 36, "nome": "STUDIO LIVING", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1090.0, 1475.0, 2140.0, 3246.25, 3210.0, 3498.0, 3708.0, 4930.0], "ciclos": [109, 118, 214, 245, 535, 318, 412, 580], "repasse": [301.47, 259.26, 245.97, 0, 0, 0, 0, 0], "total": 23297.25, "media": 2912.16, "ultima": 4930.0, "meses": 8}, {"id": 37, "nome": "CONDOMÍNIO SAMPA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [896.0, 1302.0, 2050.0, 3036.0, 2940.0, 3402.0, 3520.0, 4752.0], "ciclos": [64, 93, 164, 506, 266, 378, 320, 432], "repasse": [769.12, 672.32, 699.6, 0, 0, 0, 0, 0], "total": 21898.0, "media": 2737.25, "ultima": 4752.0, "meses": 8}, {"id": 38, "nome": "ESTILO BARROCO NR", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [769.5, 1240.0, 2002.0, 2982.0, 2875.25, 3348.0, 3501.0, 4575.0], "ciclos": [57, 124, 143, 213, 217, 372, 389, 366], "repasse": [457.6, 484.0, 453.2, 0, 0, 0, 0, 0], "total": 21292.75, "media": 2661.59, "ultima": 4575.0, "meses": 8}, {"id": 39, "nome": "CONDOMÍNIO TERRAÇO REPÚBLICA", "months": ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [476.0, 999.0, 1656.0, 2630.0, 2706.0, 3300.0, 3067.5, 4557.0], "ciclos": [34, 74, 138, 263, 246, 264, 409, 651], "repasse": [26.07, 33.84, 32.93, 0, 0, 0, 0, 0], "total": 19391.5, "media": 2423.94, "ultima": 4557.0, "meses": 8}, {"id": 40, "nome": "CONDOMÍNIO TERRAÇO REPÚBLICA", "months": ["Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [840.0, 1540.0, 2543.2, 2631.2, 2915.0, 3042.0, 4392.0], "ciclos": [60, 140, 289, 299, 220, 276, 488], "repasse": [127.8, 137.4, 0, 0, 0, 0, 0], "total": 17903.4, "media": 2557.63, "ultima": 4392.0, "meses": 7}, {"id": 41, "nome": "RESIDENCIAL GARDEN", "months": ["Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [559.0, 1391.0, 2280.0, 2496.0, 2691.0, 2864.0, 4372.0], "ciclos": [43, 107, 190, 192, 207, 358, 397], "repasse": [44.11, 46.95, 0, 0, 0, 0, 0], "total": 16653.0, "media": 2379.0, "ultima": 4372.0, "meses": 7}, {"id": 42, "nome": "CONDOMÍNIO SAMPA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1386.0, 2275.0, 2208.0, 2586.0, 2742.75, 4185.0], "ciclos": [99, 182, 184, 431, 207, 558], "repasse": [67.82, 0, 0, 0, 0, 0], "total": 15382.75, "media": 2563.79, "ultima": 4185.0, "meses": 6}, {"id": 43, "nome": "STUDIO LIVING", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1020.0, 2002.0, 2114.0, 2431.0, 2710.0, 3936.0], "ciclos": [102, 154, 151, 221, 271, 656], "repasse": [702.23, 0, 0, 0, 0, 0], "total": 14213.0, "media": 2368.83, "ultima": 3936.0, "meses": 6}, {"id": 44, "nome": "ESTILO BARROCO NR", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [972.0, 1944.0, 1904.0, 2217.6, 2691.0, 3835.0], "ciclos": [72, 162, 136, 252, 207, 295], "repasse": [1123.97, 0, 0, 0, 0, 0], "total": 13563.6, "media": 2260.6, "ultima": 3835.0, "meses": 6}, {"id": 45, "nome": "CONDOMÍNIO PASSO DIADEMA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [325.0, 1539.0, 1896.0, 2160.0, 2604.0, 3825.0], "ciclos": [26, 114, 158, 216, 186, 425], "repasse": [47.12, 0, 0, 0, 0, 0], "total": 12349.0, "media": 2058.17, "ultima": 3825.0, "meses": 6}, {"id": 46, "nome": "CONDOMÍNIO ESQUINA PAULICEIA", "months": ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [40.0, 1225.0, 1725.0, 2122.0, 2568.0, 3550.0], "ciclos": [4, 98, 138, 193, 428, 284], "repasse": [0, 0, 0, 0, 0, 0], "total": 11230.0, "media": 1871.67, "ultima": 3550.0, "meses": 6}, {"id": 47, "nome": "CONDOMÍNIO SAMPA", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1218.0, 1620.0, 2106.0, 2376.0, 3444.0], "ciclos": [87, 162, 156, 176, 246], "repasse": [0, 0, 0, 0, 0], "total": 10764.0, "media": 2152.8, "ultima": 3444.0, "meses": 5}, {"id": 48, "nome": "STUDIO LIVING", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [860.0, 1512.0, 1908.0, 2349.0, 3288.0], "ciclos": [86, 168, 159, 174, 411], "repasse": [0, 0, 0, 0, 0], "total": 9917.0, "media": 1983.4, "ultima": 3288.0, "meses": 5}, {"id": 49, "nome": "DEZ GAMELINHA", "months": ["Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [90.0, 1162.5, 1872.0, 2250.0, 3230.0], "ciclos": [6, 93, 234, 150, 646], "repasse": [0, 0, 0, 0, 0], "total": 8604.5, "media": 1720.9, "ultima": 3230.0, "meses": 5}, {"id": 50, "nome": "ESTILO BARROCO NR", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [1147.5, 1834.0, 2217.6, 2990.0], "ciclos": [85, 131, 252, 299], "repasse": [0, 0, 0, 0], "total": 8189.1, "media": 2047.28, "ultima": 2990.0, "meses": 4}, {"id": 51, "nome": "PRAÇA SÃO PAULO", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [970.0, 1815.0, 1826.0, 2954.75], "ciclos": [97, 121, 166, 223], "repasse": [0, 0, 0, 0], "total": 7565.75, "media": 1891.44, "ultima": 2954.75, "meses": 4}, {"id": 52, "nome": "DNA PAULISTA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [935.0, 1704.0, 1788.75, 2904.0], "ciclos": [85, 284, 135, 264], "repasse": [0, 0, 0, 0], "total": 7331.75, "media": 1832.94, "ultima": 2904.0, "meses": 4}, {"id": 53, "nome": "STUDIO LIVING", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [770.0, 1488.0, 1788.0, 2833.6], "ciclos": [77, 124, 149, 322], "repasse": [0, 0, 0, 0], "total": 6879.6, "media": 1719.9, "ultima": 2833.6, "meses": 4}, {"id": 54, "nome": "CONDOMINIO RESIDENCIAL JARDIM DAS ARTES", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [728.75, 1487.5, 1680.0, 2745.0], "ciclos": [55, 119, 140, 183], "repasse": [0, 0, 0, 0], "total": 6641.25, "media": 1660.31, "ultima": 2745.0, "meses": 4}, {"id": 55, "nome": "VIBRA SANTANA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [684.0, 1450.0, 1587.5, 2712.5], "ciclos": [57, 116, 127, 217], "repasse": [0, 0, 0, 0], "total": 6434.0, "media": 1608.5, "ultima": 2712.5, "meses": 4}, {"id": 56, "nome": "MODERN ESTAÇÃO BUTANTÃ", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [469.2, 1344.0, 1476.0, 2625.0], "ciclos": [51, 112, 123, 210], "repasse": [0, 0, 0, 0], "total": 5914.2, "media": 1478.55, "ultima": 2625.0, "meses": 4}, {"id": 57, "nome": "CONDOMINIO CONJUNTO NOVO BUTANTÃ", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [387.5, 1204.0, 1375.0, 2619.0], "ciclos": [31, 86, 110, 194], "repasse": [0, 0, 0, 0], "total": 5585.5, "media": 1396.38, "ultima": 2619.0, "meses": 4}, {"id": 58, "nome": "METRO CASA VILA EMA II", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [264.0, 1046.75, 1140.8, 2355.2], "ciclos": [33, 79, 124, 256], "repasse": [0, 0, 0, 0], "total": 4806.75, "media": 1201.69, "ultima": 2355.2, "meses": 4}, {"id": 59, "nome": "WELCONX VILA OLIMPIA", "months": ["Dez/25", "Jan/26", "Fev/26", "Mar/26"], "receita": [55.2, 990.0, 864.0, 2186.25], "ciclos": [6, 99, 72, 165], "repasse": [0, 0, 0, 0], "total": 4095.45, "media": 1023.86, "ultima": 2186.25, "meses": 4}, {"id": 60, "nome": "STUDIO LIVING", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [780.0, 854.0, 2160.0], "ciclos": [78, 61, 180], "repasse": [0, 0, 0], "total": 3794.0, "media": 1264.67, "ultima": 2160.0, "meses": 3}, {"id": 61, "nome": "MODERN ESTAÇÃO BUTANTÃ", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [671.6, 840.0, 1848.0], "ciclos": [73, 60, 154], "repasse": [0, 0, 0], "total": 3359.6, "media": 1119.87, "ultima": 1848.0, "meses": 3}, {"id": 62, "nome": "WELCONX VILA OLIMPIA", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [653.2, 800.4, 1824.0], "ciclos": [71, 87, 152], "repasse": [0, 0, 0], "total": 3277.6, "media": 1092.53, "ultima": 1824.0, "meses": 3}, {"id": 63, "nome": "CONDOMINIO CONJUNTO NOVO BUTANTÃ", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [387.5, 740.0, 1675.0], "ciclos": [31, 74, 134], "repasse": [0, 0, 0], "total": 2802.5, "media": 934.17, "ultima": 1675.0, "meses": 3}, {"id": 64, "nome": "CONDOMINIO GRAVURA PERDIZES", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [337.5, 737.5, 1640.0], "ciclos": [45, 59, 205], "repasse": [0, 0, 0], "total": 2715.0, "media": 905.0, "ultima": 1640.0, "meses": 3}, {"id": 65, "nome": "AMBIENCE VILA MARIANA", "months": ["Jan/26", "Fev/26", "Mar/26"], "receita": [77.0, 575.0, 1628.4], "ciclos": [11, 46, 177], "repasse": [0, 0, 0], "total": 2280.4, "media": 760.13, "ultima": 1628.4, "meses": 3}, {"id": 66, "nome": "ALPHAVIEW", "months": ["Fev/26", "Mar/26"], "receita": [420.0, 1612.5], "ciclos": [30, 129], "repasse": [0, 0], "total": 2032.5, "media": 1016.25, "ultima": 1612.5, "meses": 2}, {"id": 67, "nome": "N URBAN VILA MARIANA", "months": ["Fev/26", "Mar/26"], "receita": [420.0, 1606.5], "ciclos": [30, 119], "repasse": [0, 0], "total": 2026.5, "media": 1013.25, "ultima": 1606.5, "meses": 2}, {"id": 68, "nome": "AMBIENCE VILA MARIANA", "months": ["Fev/26", "Mar/26"], "receita": [336.0, 1582.0], "ciclos": [48, 113], "repasse": [0, 0], "total": 1918.0, "media": 959.0, "ultima": 1582.0, "meses": 2}, {"id": 69, "nome": "GIGRAN", "months": ["Fev/26", "Mar/26"], "receita": [301.4, 1251.0], "ciclos": [30, 139], "repasse": [0, 0], "total": 1552.4, "media": 776.2, "ultima": 1251.0, "meses": 2}, {"id": 70, "nome": "MISTRAL", "months": ["Fev/26", "Mar/26"], "receita": [121.5, 1162.0], "ciclos": [9, 83], "repasse": [0, 0], "total": 1283.5, "media": 641.75, "ultima": 1162.0, "meses": 2}, {"id": 71, "nome": "PERDIZES ABSOLUTO", "months": ["Fev/26", "Mar/26"], "receita": [115.0, 1128.0], "ciclos": [23, 94], "repasse": [0, 0], "total": 1243.0, "media": 621.5, "ultima": 1128.0, "meses": 2}, {"id": 72, "nome": "PRAÇA SÃO PAULO", "months": ["Fev/26", "Mar/26"], "receita": [50.0, 986.0], "ciclos": [5, 68], "repasse": [0, 0], "total": 1036.0, "media": 518.0, "ultima": 986.0, "meses": 2}, {"id": 73, "nome": "NEX ONE JOÃO CACHOEIRA", "months": ["Fev/26", "Mar/26"], "receita": [40.0, 938.0], "ciclos": [4, 67], "repasse": [0, 0], "total": 978.0, "media": 489.0, "ultima": 938.0, "meses": 2}, {"id": 74, "nome": "TSS BOM FIM", "months": ["Fev/26", "Mar/26"], "receita": [20.0, 850.0], "ciclos": [2, 85], "repasse": [0, 0], "total": 870.0, "media": 435.0, "ultima": 850.0, "meses": 2}, {"id": 75, "nome": "CONDOMINIO TURIASSU", "months": ["Fev/26", "Mar/26"], "receita": [0.0, 750.0], "ciclos": [802, 75], "repasse": [0, 0], "total": 750.0, "media": 375.0, "ultima": 750.0, "meses": 2}, {"id": 76, "nome": "ZOOM SANTA CECILIA (RESIDENCIAL)", "months": ["Fev/26", "Mar/26"], "receita": [0.0, 537.5], "ciclos": [857, 43], "repasse": [0, 0], "total": 537.5, "media": 268.75, "ultima": 537.5, "meses": 2}, {"id": 77, "nome": "NEX ONE JOÃO CACHOEIRA", "months": ["Mar/26"], "receita": [500.0], "ciclos": [50], "repasse": [0], "total": 500.0, "media": 500.0, "ultima": 500.0, "meses": 1}, {"id": 78, "nome": "AMBIENCE VILA MARIANA", "months": ["Mar/26"], "receita": [364.0], "ciclos": [52], "repasse": [0], "total": 364.0, "media": 364.0, "ultima": 364.0, "meses": 1}, {"id": 79, "nome": "GIGRAN", "months": ["Mar/26"], "receita": [201.0], "ciclos": [20], "repasse": [0], "total": 201.0, "media": 201.0, "ultima": 201.0, "meses": 1}, {"id": 80, "nome": "VITAL HOME PARQUE BUTANTÃ NR", "months": ["Mar/26"], "receita": [153.0], "ciclos": [17], "repasse": [0], "total": 153.0, "media": 153.0, "ultima": 153.0, "meses": 1}];
+
+const PURPLE='#6B4EC2', TEAL='#00C896';
 let currentFilter='all', modalChartInst=null;
 
 function fmt(v){return'R$ '+Math.round(v).toLocaleString('pt-BR')}
-function fmtK(v){return v==null?'':v>=1000?'R$ '+(v/1000).toFixed(0)+'k':'R$ '+Math.round(v)}
+function fmtK(v){
+  if(v==null||v===0) return '—';
+  return v>=1000?'R$ '+(v/1000).toFixed(0)+'k':'R$ '+Math.round(v);
+}
 
 function getFiltered(){
   const q=document.getElementById('searchInput').value.trim().toLowerCase();
   const sort=document.getElementById('sortSelect').value;
   let arr=UNITS.filter(u=>{
     if(q && !u.nome.toLowerCase().includes(q) && !String(u.id).includes(q)) return false;
-    if(currentFilter==='top10') return UNITS.indexOf(u)<10;
+    if(currentFilter==='top10') return UNITS.slice(0,10).includes(u);
     if(currentFilter==='15meses') return u.meses>=15;
     return true;
   });
@@ -271,51 +219,41 @@ function setFilter(f,btn){
   currentFilter=f;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  filterUnits();
+  renderGrid();
 }
 
-function filterUnits(){
+function renderGrid(){
   const arr=getFiltered();
   const grid=document.getElementById('unitGrid');
   const empty=document.getElementById('emptyState');
   document.getElementById('countLabel').textContent=arr.length+' lavanderia'+(arr.length!==1?'s':'');
   if(!arr.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  grid.innerHTML=arr.map((u,idx)=>{
-    const lastRec=u.receita[u.receita.length-1]||0;
-    const trend=u.receita.length>1?(lastRec-(u.receita[u.receita.length-2]||0)):0;
-    const trendStr=trend>=0?'<span style="color:var(--teal-dark)">↑ '+fmt(trend)+'</span>':'<span style="color:var(--red)">↓ '+fmt(Math.abs(trend))+'</span>';
-    return \`<div class="unit-card" style="animation-delay:\${Math.min(idx,20)*0.03}s" onclick="openModal(\${u.id})">
-      <div class="unit-card-header">
-        <div class="unit-card-top">
-          <div>
-            <div class="unit-id">#\${String(u.id).padStart(4,'0')}</div>
-            <div class="unit-name">\${u.nome}</div>
-          </div>
-          <div class="unit-badge">\${u.meses} meses</div>
-        </div>
-      </div>
-      <div class="unit-metrics">
-        <div class="metric-item">
-          <div class="metric-label">Total</div>
-          <div class="metric-val purple">\${fmtK(u.total)}</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-label">Média/mês</div>
-          <div class="metric-val">\${fmtK(u.media)}</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-label">Mar/26</div>
-          <div class="metric-val green">\${u.ultima>0?fmtK(u.ultima):'—'}</div>
-        </div>
-      </div>
-      <div class="unit-chart"><canvas id="sparkline-\${u.id}"></canvas></div>
-    </div>\`;
+
+  grid.innerHTML = arr.map(function(u, idx){
+    var lastRec = u.receita[u.receita.length-1]||0;
+    var prev = u.receita.length>1 ? (u.receita[u.receita.length-2]||0) : 0;
+    var trend = lastRec - prev;
+    var trendHtml = trend>=0
+      ? '<span style="color:var(--teal-dark);font-size:11px">↑ '+fmt(trend)+'</span>'
+      : '<span style="color:var(--red);font-size:11px">↓ '+fmt(Math.abs(trend))+'</span>';
+    return '<div class="unit-card" style="animation-delay:'+Math.min(idx,20)*0.03+'s" onclick="openModal('+u.id+')">'
+      +'<div class="unit-card-header">'
+      +'<div class="unit-card-top">'
+      +'<div><div class="unit-id">#'+String(u.id).padStart(4,'0')+'</div>'
+      +'<div class="unit-name">'+u.nome+'</div></div>'
+      +'<div class="unit-badge">'+u.meses+' meses</div></div></div>'
+      +'<div class="unit-metrics">'
+      +'<div class="metric-item"><div class="metric-label">Total</div><div class="metric-val purple">'+fmtK(u.total)+'</div></div>'
+      +'<div class="metric-item"><div class="metric-label">Média/mês</div><div class="metric-val">'+fmtK(u.media)+'</div></div>'
+      +'<div class="metric-item"><div class="metric-label">Mar/26</div><div class="metric-val green">'+fmtK(u.ultima)+'</div></div>'
+      +'</div>'
+      +'<div class="unit-chart"><canvas id="spark-'+u.id+'"></canvas></div>'
+      +'</div>';
   }).join('');
-  
-  // Draw sparklines
-  arr.forEach(u=>{
-    const canvas=document.getElementById('sparkline-'+u.id);
+
+  arr.forEach(function(u){
+    var canvas=document.getElementById('spark-'+u.id);
     if(!canvas) return;
     new Chart(canvas,{type:'line',data:{labels:u.months,datasets:[{
       data:u.receita,borderColor:PURPLE,backgroundColor:'rgba(107,78,194,.08)',
@@ -327,7 +265,7 @@ function filterUnits(){
 }
 
 function openModal(id){
-  const u=UNITS.find(x=>x.id===id);
+  var u=UNITS.find(function(x){return x.id===id;});
   if(!u) return;
   document.getElementById('mId').textContent='#'+String(u.id).padStart(4,'0');
   document.getElementById('mName').textContent=u.nome;
@@ -335,43 +273,41 @@ function openModal(id){
   document.getElementById('mMedia').textContent=fmt(u.media);
   document.getElementById('mUltima').textContent=u.ultima>0?fmt(u.ultima):'—';
   document.getElementById('mMeses').textContent=u.meses+' meses';
-  
-  // Table
-  const tbody=document.getElementById('mTableBody');
-  tbody.innerHTML=u.months.map((m,i)=>{
-    const rep=u.repasse[i]||0;
-    const liq=u.receita[i]-rep;
-    return \`<tr>
-      <td><b>\${m}</b></td>
-      <td class="num">\${u.ciclos[i].toLocaleString('pt-BR')}</td>
-      <td class="num">\${fmt(u.receita[i])}</td>
-      <td class="num neg">\${rep>0?'− '+fmt(rep):'—'}</td>
-      <td class="num \${liq>=0?'pos':''}">\${fmt(liq)}</td>
-    </tr>\`;
+
+  var tbody=document.getElementById('mTableBody');
+  tbody.innerHTML=u.months.map(function(m,i){
+    var rep=u.repasse[i]||0;
+    var liq=u.receita[i]-rep;
+    return '<tr>'
+      +'<td><b>'+m+'</b></td>'
+      +'<td class="num">'+u.ciclos[i].toLocaleString('pt-BR')+'</td>'
+      +'<td class="num">'+fmt(u.receita[i])+'</td>'
+      +'<td class="num neg">'+(rep>0?'− '+fmt(rep):'—')+'</td>'
+      +'<td class="num '+(liq>=0?'pos':'neg')+'">'+fmt(liq)+'</td>'
+      +'</tr>';
   }).join('');
-  
-  // Chart
+
   if(modalChartInst) modalChartInst.destroy();
-  const ctx=document.getElementById('modalChart').getContext('2d');
+  var ctx=document.getElementById('modalChart').getContext('2d');
   modalChartInst=new Chart(ctx,{type:'bar',data:{
     labels:u.months,
     datasets:[
       {label:'Receita',data:u.receita,backgroundColor:PURPLE,borderRadius:4,borderSkipped:false,order:2},
       {label:'Repasse (despesa)',data:u.repasse,backgroundColor:'rgba(217,64,96,.7)',borderRadius:4,borderSkipped:false,order:3},
       {label:'Ciclos',data:u.ciclos,type:'line',borderColor:TEAL,backgroundColor:'transparent',
-       borderWidth:2,pointRadius:3,pointBackgroundColor:TEAL,tension:.4,yAxisID:'y1',order:1},
+       borderWidth:2,pointRadius:3,pointBackgroundColor:TEAL,tension:.4,yAxisID:'y1',order:1}
     ]
   },options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12}}},
     scales:{
       x:{grid:{display:false},ticks:{font:{size:10}}},
       y:{grid:{color:'rgba(107,78,194,.06)'},border:{display:false},
-        ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k',font:{size:10}}},
-      y1:{position:'right',grid:{display:false},
-        ticks:{font:{size:10}},title:{display:true,text:'Ciclos',font:{size:10}}}
+        ticks:{callback:function(v){return 'R$ '+(v/1000).toFixed(0)+'k';},font:{size:10}}},
+      y1:{position:'right',grid:{display:false},ticks:{font:{size:10}},
+        title:{display:true,text:'Ciclos',font:{size:10}}}
     }
   }});
-  
+
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -383,9 +319,9 @@ function closeModalDirect(){
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow='';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModalDirect()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape') closeModalDirect();});
+renderGrid();
 
-filterUnits();
 </script>
 </body>
 </html>

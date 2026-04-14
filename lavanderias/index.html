@@ -273,8 +273,14 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
       <div class="modal-section-title">Historico Detalhado</div>
       <table class="modal-table">
         <thead><tr>
-          <th>Mes</th><th class="num">Ciclos</th><th class="num">Receita</th>
-          <th class="num">Repasse Correto</th><th class="num">Liquido</th>
+          <th>Mês</th>
+          <th class="num">Receita</th>
+          <th class="num">Repasse</th>
+          <th class="num">Máq/Impl.</th>
+          <th class="num">ESI</th>
+          <th class="num">Outros</th>
+          <th class="num">Resultado</th>
+          <th class="num">Saldo Acum.</th>
         </tr></thead>
         <tbody id="mTableBody"></tbody>
       </table>
@@ -326,7 +332,85 @@ function setFilter(f,btn){
   currentFilter=f;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  renderGrid();
+  
+// ── Total Geral Modal Functions ──────────────────────────────────────
+var totalChartInst=null, totalSaldoInst=null, totalFluxoInst=null;
+
+function openTotalModal(){
+  var saldoAcumTotal=0;
+  var tbody=document.getElementById('totalTableBody');
+  if(tbody){
+    tbody.innerHTML=TOTAL.months.map(function(m,i){
+      var saldo=TOTAL.saldo[i];
+      var prev=i===0?0:(TOTAL.saldo[i-1]||0);
+      var mensal=i===0?saldo:(saldo-prev);
+      return '<tr>'
+        +'<td><b>'+m+'</b></td>'
+        +'<td class="num pos">'+fmt(TOTAL.investimento[i])+'</td>'
+        +'<td class="num" style="color:var(--teal-dark)">'+fmt(TOTAL.receita_ciclos[i])+'</td>'
+        +'<td class="num neg">'+fmt(TOTAL.debito[i])+'</td>'
+        +'<td class="num '+(mensal>=0?'pos':'neg')+'">'+fmt(mensal)+'</td>'
+        +'<td class="num '+(saldo>=0?'pos':'neg')+'" style="font-weight:700;border-left:2px solid var(--lavender-mid)">'+fmt(saldo)+'</td>'
+        +'</tr>';
+    }).join('');
+  }
+
+  if(totalSaldoInst) totalSaldoInst.destroy();
+  var canvS=document.getElementById('totalSaldoChart');
+  if(canvS){
+    totalSaldoInst=new Chart(canvS,{type:'bar',data:{labels:TOTAL.months,datasets:[
+      {label:'Saldo',data:TOTAL.saldo,
+       backgroundColor:TOTAL.saldo.map(function(v){return v>=0?'rgba(0,200,150,0.85)':'rgba(217,64,96,0.85)';}),
+       borderRadius:4,borderSkipped:false}
+    ]},options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45}},
+        y:{grid:{color:'rgba(107,78,194,.05)'},border:{display:false},
+          ticks:{callback:function(v){return 'R$ '+(v/1000000).toFixed(1)+'M';},font:{size:9}}}}}});
+  }
+
+  if(totalFluxoInst) totalFluxoInst.destroy();
+  var canvF=document.getElementById('totalFluxoChart');
+  if(canvF){
+    totalFluxoInst=new Chart(canvF,{type:'bar',data:{labels:TOTAL.months,datasets:[
+      {label:'Investimentos',data:TOTAL.investimento,backgroundColor:'rgba(107,78,194,0.7)',borderRadius:4,borderSkipped:false,stack:'c'},
+      {label:'Receita Ciclos',data:TOTAL.receita_ciclos,backgroundColor:'rgba(0,200,150,0.75)',borderRadius:4,borderSkipped:false,stack:'c'},
+      {label:'Despesas',data:TOTAL.debito.map(function(v){return -v;}),backgroundColor:'rgba(217,64,96,0.7)',borderRadius:4,borderSkipped:false,stack:'d'},
+    ]},options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45}},
+        y:{grid:{color:'rgba(107,78,194,.05)'},border:{display:false},stacked:true,
+          ticks:{callback:function(v){return 'R$ '+(v/1000000).toFixed(1)+'M';},font:{size:9}}}}}});
+  }
+
+  document.getElementById('totalModalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeTotalModal(e){
+  if(e.target===document.getElementById('totalModalOverlay')) closeTotalModalDirect();
+}
+function closeTotalModalDirect(){
+  document.getElementById('totalModalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function drawCompanySparkline(){
+  var canvas=document.getElementById('companySparkline');
+  if(!canvas) return;
+  new Chart(canvas,{type:'line',data:{labels:TOTAL.months,datasets:[
+    {data:TOTAL.saldo,
+     borderColor:'rgba(0,200,150,0.9)',backgroundColor:'rgba(0,200,150,0.1)',
+     fill:true,tension:.4,borderWidth:2,pointRadius:0,
+     segment:{borderColor:function(ctx){return ctx.p1.parsed.y>=0?'rgba(0,200,150,0.9)':'rgba(217,64,96,0.9)';},
+              backgroundColor:function(ctx){return ctx.p1.parsed.y>=0?'rgba(0,200,150,0.08)':'rgba(217,64,96,0.08)';}}}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{x:{display:false},y:{display:false}}}});
+}
+drawCompanySparkline();
+
+renderGrid();
 }
 
 function renderGrid(){
@@ -383,6 +467,7 @@ function openModal(id){
   document.getElementById('mMeses').textContent=(res>=0?'+':'')+fmt(res);
 
   var tbody=document.getElementById('mTableBody');
+  var saldoAcum=0;
   tbody.innerHTML=u.months.map(function(m,i){
     var rec=u.receita[i]||0;
     var rep=u.repasse[i]||0;
@@ -393,6 +478,7 @@ function openModal(id){
     var obra=(u.obra&&u.obra[i])||0;
     var outrosDeb=esi+od+sal+obra;
     var resultado=rec-rep-maq-outrosDeb;
+    saldoAcum+=resultado;
     return '<tr>'
       +'<td><b>'+m+'</b></td>'
       +'<td class="num">'+fmt(rec)+'</td>'
@@ -401,6 +487,7 @@ function openModal(id){
       +'<td class="num neg">'+(esi>0?'− '+fmt(esi):'—')+'</td>'
       +'<td class="num neg">'+(outrosDeb>0?'− '+fmt(outrosDeb):'—')+'</td>'
       +'<td class="num '+(resultado>=0?'pos':'neg')+'">'+fmt(resultado)+'</td>'
+      +'<td class="num '+(saldoAcum>=0?'pos':'neg')+'" style="font-weight:700;border-left:2px solid var(--lavender-mid)">'+fmt(saldoAcum)+'</td>'
       +'</tr>';
   }).join('');
 
@@ -526,8 +613,8 @@ updateSaldoHoje();
       <div class="modal-section-title">Historico Mensal Completo</div>
       <table class="modal-table">
         <thead><tr>
-          <th>Mes</th><th class="num">Investimento</th><th class="num">Receita Ciclos</th>
-          <th class="num">Total Debitos</th><th class="num">Saldo</th>
+          <th>Mês</th><th class="num">Investimento</th><th class="num">Receita Ciclos</th>
+          <th class="num">Total Débitos</th><th class="num">Saldo Mensal</th><th class="num">Saldo Acum.</th>
         </tr></thead>
         <tbody id="totalTableBody"></tbody>
       </table>

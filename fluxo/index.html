@@ -258,10 +258,10 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh;background:
     </div>
 
     <div class="hero-stat">
-      <div class="hero-stat-label">Projeção Dez/26</div>
-      <div class="hero-stat-val">R$ 686.000</div>
-      <div class="hero-stat-delta">+60% vs hoje</div>
-      <div class="hero-stat-sub">~122 lavanderias</div>
+      <div class="hero-stat-label">Lavanderias Ativas</div>
+      <div class="hero-stat-val teal">80</div>
+      <div class="hero-stat-delta">Pipeline: +37 em obra/assinadas</div>
+      <div class="hero-stat-sub">dados até Mar/2026</div>
     </div>
 
     <div class="hero-stat">
@@ -556,15 +556,15 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh;background:
 // ── DATA — all variables declared first ──────────────────────────
 const PURPLE='#6B4EC2', TEAL='#00C896';
 const LABELS=['Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
-const PREV=['Abr/26','Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26'];
+const PREV=[];
 const REC=[152104,138311,156968,161733,162557,184427,217048,232473,220460,248138,304093,308332,320211,330196,423815];
-const RPREV=[493315,549791,562437,573256,592251,631426,662785,676330,686067];
+const RPREV=[];
 const UNITS=[23,23,24,25,25,31,34,39,41,46,49,59,65,74,80];
-const UPREV=[98,106,107,108,111,116,121,122,122];
+const UPREV=[];
 const REP=REC.map(r=>Math.round(r*0.18));
 const REPPREV=RPREV.map(r=>Math.round(r*0.18));
-const RPREV_BASE=[423815,432291,440937,449756,458751,467926,477285,486830,496567];
-const RPREV_NEW=[69500,117500,121500,123500,133500,163500,185500,189500,189500];
+const RPREV_BASE=[];
+const RPREV_NEW=[];
 const ALL_LABELS=[...LABELS,...PREV];
 const ALL_REC=[...REC,...new Array(9).fill(null)];
 const ALL_PREV=[...new Array(15).fill(null),...RPREV];
@@ -686,9 +686,7 @@ new Chart(document.getElementById('chartSaldo'),{
       {label:'Saldo Corrigido (realizado)',data:[...SALDO_HIST,...new Array(9).fill(null)],
         backgroundColor:SALDO_HIST.map(v=>v>=0?'rgba(0,200,150,0.85)':'rgba(217,64,96,0.85)'),
         borderRadius:5,borderSkipped:false,order:2},
-      {label:'Saldo Projetado (pipeline real)',data:[...new Array(35).fill(null),...SALDO_PROJ],
-        backgroundColor:SALDO_PROJ.map(v=>v>=0?'rgba(0,200,150,0.35)':'rgba(217,64,96,0.35)'),
-        borderRadius:5,borderSkipped:false,order:3},
+      {label:{label:'',data:[],hidden:true},
       {label:'Saldo Original (fluxo)',data:SALDO_ORIG_FULL,
         type:'line',borderColor:'rgba(107,78,194,0.45)',backgroundColor:'transparent',
         borderWidth:1.5,borderDash:[4,3],pointRadius:2,pointBackgroundColor:'rgba(107,78,194,0.45)',

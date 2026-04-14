@@ -207,7 +207,7 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
     <div style="margin-bottom:16px">
       <div class="company-eyebrow">Consolidado Geral &bull; Mai/2023 &rarr; Ago/2026</div>
       <div class="company-title">Fluxo Total da Empresa</div>
-      <div class="company-sub">Conta Principal + todas as lavanderias &bull; Clique nos KPIs para detalhes</div>
+      <div class="company-sub">Conta Principal + todas as lavanderias &bull; Clique nos KPIs para detalhes &bull; <span id="dataHojeLabel" style="color:rgba(0,200,150,.8);font-weight:700"></span></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr) 2fr;gap:12px;align-items:stretch">
       <div class="company-kpi" onclick="openTotalModal()">
@@ -231,9 +231,9 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
         <div class="company-kpi-sub">6% das despesas</div>
       </div>
       <div class="company-kpi" onclick="openTotalModal()">
-        <div class="company-kpi-label">Saldo Atual</div>
-        <div class="company-kpi-val" id="compSaldo">R$ 523k</div>
-        <div class="company-kpi-sub">original ago/26</div>
+        <div class="company-kpi-label">Saldo Hoje</div>
+        <div class="company-kpi-val" id="compSaldo">Calculando...</div>
+        <div class="company-kpi-sub" id="compSaldoSub">atualizando...</div>
       </div>
       <div class="company-chart-panel" onclick="openTotalModal()" style="cursor:pointer">
         <div class="company-chart-title">Evolução do Saldo &rarr; Ver detalhe completo</div>
@@ -438,6 +438,39 @@ function closeModalDirect(){
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape') closeModalDirect();});
 renderGrid();
+
+function calcSaldoHoje(){
+  var BASE = -1413065.43;
+  var NET = {"2026-04": 294923, "2026-05": 341233, "2026-06": 351603, "2026-07": 360475, "2026-08": 376051, "2026-09": 408174, "2026-10": 437549, "2026-11": 448656, "2026-12": 456640};
+  var hoje = new Date();
+  var a=hoje.getFullYear(), m=hoje.getMonth()+1, d=hoje.getDate();
+  var saldo=BASE;
+  var ca=2026, cm=4;
+  while(ca<a||(ca===a&&cm<m)){
+    var k=ca+'-'+(cm<10?'0':'')+cm;
+    saldo+=(NET[k]||0); cm++; if(cm>12){cm=1;ca++;}
+  }
+  var km=a+'-'+(m<10?'0':'')+m;
+  var dias=new Date(a,m,0).getDate();
+  saldo+=(NET[km]||0)*(d/dias);
+  return {saldo:Math.round(saldo), hoje:hoje};
+}
+
+function updateSaldoHoje(){
+  var r=calcSaldoHoje(), s=r.saldo, h=r.hoje;
+  var mn=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  var ds=h.getDate()+' '+mn[h.getMonth()]+'/'+h.getFullYear();
+  var abs=Math.abs(s);
+  var str=abs>=1000000?'R$ '+(abs/1000000).toFixed(2)+'M':abs>=1000?'R$ '+(abs/1000).toFixed(0)+'k':'R$ '+Math.round(abs).toLocaleString('pt-BR');
+  var el=document.getElementById('compSaldo');
+  var sub=document.getElementById('compSaldoSub');
+  if(el){el.textContent=(s<0?'− ':'')+str; el.style.color=s>=0?'#00C896':'#FF6B8A';}
+  if(sub) sub.textContent='estimado '+ds;
+  var ml=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var lb=document.getElementById('dataHojeLabel');
+  if(lb) lb.textContent=h.getDate()+' de '+ml[h.getMonth()]+' de '+h.getFullYear();
+}
+updateSaldoHoje();
 
 </script>
 

@@ -133,6 +133,34 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
 .total-cta{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase}
 .teal{color:var(--teal-dark)}
 
+
+.company-panel{
+  background:linear-gradient(135deg,#1E1440 0%,#3B2080 50%,#6B4EC2 100%);
+  padding:28px 40px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.company-panel-inner{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 340px;gap:20px;align-items:center}
+.company-kpi-group{display:flex;flex-direction:column;gap:14px}
+.company-kpi{padding:14px 18px;background:rgba(255,255,255,.08);border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);cursor:default;transition:background .15s}
+.company-kpi:hover{background:rgba(255,255,255,.14)}
+.company-kpi-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.company-kpi-val{font-size:22px;font-weight:800;color:#fff;line-height:1}
+.company-kpi-val.teal{color:#00C896}
+.company-kpi-val.red{color:#FF6B8A}
+.company-kpi-val.amber{color:#FFCB6B}
+.company-kpi-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:4px}
+.company-chart-panel{background:rgba(255,255,255,.06);border-radius:16px;
+  padding:16px;border:1px solid rgba(255,255,255,.1)}
+.company-chart-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.company-chart-wrap{height:90px;position:relative}
+.company-eyebrow{font-size:10px;font-weight:700;color:#00C896;letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:5px}
+.company-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:3px}
+.company-sub{font-size:12px;color:rgba(255,255,255,.4)}
+.company-divider{width:1px;background:rgba(255,255,255,.12);height:100%}
+
 </style>
 </head>
 <body>
@@ -173,44 +201,52 @@ body{font-family:var(--font);color:var(--text-dark);min-height:100vh}
     <option value="nome">A &#8594; Z Nome</option>
   </select>
 </div>
+
+<div class="company-panel">
+  <div class="company-inner" style="max-width:1400px;margin:0 auto">
+    <div style="margin-bottom:16px">
+      <div class="company-eyebrow">Consolidado Geral &bull; Mai/2023 &rarr; Ago/2026</div>
+      <div class="company-title">Fluxo Total da Empresa</div>
+      <div class="company-sub">Conta Principal + todas as lavanderias &bull; Clique nos KPIs para detalhes</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr) 2fr;gap:12px;align-items:stretch">
+      <div class="company-kpi" onclick="openTotalModal()">
+        <div class="company-kpi-label">Investimentos</div>
+        <div class="company-kpi-val amber">R$ 15,0M</div>
+        <div class="company-kpi-sub">aportes &amp; capital</div>
+      </div>
+      <div class="company-kpi" onclick="openTotalModal()">
+        <div class="company-kpi-label">Receita Ciclos</div>
+        <div class="company-kpi-val teal">R$ 6,3M</div>
+        <div class="company-kpi-sub">Mai/23 &rarr; Mar/26</div>
+      </div>
+      <div class="company-kpi" onclick="openTotalModal()">
+        <div class="company-kpi-label">Implantações</div>
+        <div class="company-kpi-val red">R$ 16,5M</div>
+        <div class="company-kpi-sub">79% das despesas</div>
+      </div>
+      <div class="company-kpi" onclick="openTotalModal()">
+        <div class="company-kpi-label">Repasse Total</div>
+        <div class="company-kpi-val red">R$ 1,3M</div>
+        <div class="company-kpi-sub">6% das despesas</div>
+      </div>
+      <div class="company-kpi" onclick="openTotalModal()">
+        <div class="company-kpi-label">Saldo Atual</div>
+        <div class="company-kpi-val" id="compSaldo">R$ 523k</div>
+        <div class="company-kpi-sub">original ago/26</div>
+      </div>
+      <div class="company-chart-panel" onclick="openTotalModal()" style="cursor:pointer">
+        <div class="company-chart-title">Evolução do Saldo &rarr; Ver detalhe completo</div>
+        <div class="company-chart-wrap"><canvas id="companySparkline"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grid-wrap">
   <div class="grid" id="unitGrid">
 
-<div class="total-card" onclick="openTotalModal()">
-  <div class="total-card-inner">
-    <div class="total-header">
-      <div class="total-eyebrow">Consolidado geral</div>
-      <div class="total-title">Fluxo Total da Empresa</div>
-      <div class="total-sub">Mai/2023 &rarr; Ago/2026 &middot; Todas as contas</div>
-    </div>
-    <div class="total-kpis">
-      <div class="total-kpi">
-        <div class="total-kpi-label">Investimentos</div>
-        <div class="total-kpi-val">R$ 15,0M</div>
-        <div class="total-kpi-sub">aportes &amp; capital</div>
-      </div>
-      <div class="total-kpi">
-        <div class="total-kpi-label">Receita Ciclos</div>
-        <div class="total-kpi-val teal">R$ 6,3M</div>
-        <div class="total-kpi-sub">Mai/23 &rarr; Mar/26</div>
-      </div>
-      <div class="total-kpi">
-        <div class="total-kpi-label">Total Despesas</div>
-        <div class="total-kpi-val red">R$ 20,8M</div>
-        <div class="total-kpi-sub">implant. + operac.</div>
-      </div>
-      <div class="total-kpi">
-        <div class="total-kpi-label">Saldo Atual</div>
-        <div class="total-kpi-val">R$ 523k</div>
-        <div class="total-kpi-sub">saldo original ago/26</div>
-      </div>
-    </div>
-    <div class="total-chart-wrap">
-      <canvas id="totalSparkline"></canvas>
-    </div>
-    <div class="total-cta">Ver fluxo completo &rarr;</div>
-  </div>
-</div>
+
 </div>
   <div class="empty" id="emptyState" style="display:none">
     <div class="empty-icon">&#128269;</div>
